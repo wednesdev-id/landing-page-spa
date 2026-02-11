@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import SEO from '../components/SEO';
 import spaPos07 from '../assets/spa-pos-07.png';
 import spaPos09 from '../assets/spa-pos-09.png';
 import './LandingPage.css';
@@ -86,15 +88,22 @@ const LandingPage: React.FC = () => {
 
     return (
         <div className="landing-page">
+            <SEO
+                title="SPAPOSPLUS - Aplikasi Kasir & Manajemen Spa Terbaik"
+                description="Kelola bisnis spa Anda dengan mudah menggunakan SPAPOSPLUS. Booking online, manajemen terapis, laporan keuangan, dan POS dalam satu aplikasi."
+            />
             {/* Navigation */}
             <nav className="landing-nav">
                 <div className="landing-nav-content">
                     <div className="landing-logo">
                         <img src={spaPos07} alt="SPAPOSPLUS" style={{ height: '40px', width: 'auto' }} />
                     </div>
-                    <button className="nav-cta" onClick={handleGetStarted}>
-                        {isAuthenticated ? 'Dashboard' : 'Masuk'}
-                    </button>
+                    <div className="flex items-center gap-6">
+                        <Link to="/blog" className="text-gray-600 hover:text-gray-900 font-medium">Blog</Link>
+                        <button className="nav-cta" onClick={handleGetStarted}>
+                            {isAuthenticated ? 'Dashboard' : 'Masuk'}
+                        </button>
+                    </div>
                 </div>
             </nav>
 
@@ -328,6 +337,7 @@ const LandingPage: React.FC = () => {
                         <div>
                             <span className="logo-text">SPAPOSPLUS</span>
                             <p className="footer-tagline">Spa POS & Management System</p>
+                            <Link to="/blog" className="text-sm text-gray-400 hover:text-white mt-1 block">Read our Blog</Link>
                         </div>
                     </div>
                     <div className="footer-links">
