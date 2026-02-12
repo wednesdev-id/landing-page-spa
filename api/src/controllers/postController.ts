@@ -36,6 +36,17 @@ class PostController {
             res.status(500).json({ error: 'Error creating post' });
         }
     }
+
+    async deletePost(req: Request, res: Response) {
+        const { id } = req.params;
+        try {
+            await postService.deletePost(id as string);
+            res.status(204).send();
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error deleting post' });
+        }
+    }
 }
 
 export default new PostController();

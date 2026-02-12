@@ -30,6 +30,10 @@ class PostService {
         };
         return postRepository.create(data);
     }
+
+    async deletePost(id: string) {
+        return postRepository.delete(id);
+    }
 }
 
 export default new PostService();

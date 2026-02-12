@@ -17,3 +17,236 @@ body {
 #root {
   min-height: 100vh;
 }
+
+/* ===== Medium-Style Editor ===== */
+
+/* Wrapper */
+.medium-editor-wrapper {
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* Sticky Toolbar */
+.medium-toolbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #f0f0f0;
+  padding: 8px 24px;
+}
+
+.medium-toolbar-inner {
+  max-width: 740px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #555;
+  font-size: 14px;
+  transition: all 0.15s;
+}
+
+.toolbar-btn:hover {
+  background: #f5f5f5;
+  color: #222;
+}
+
+.toolbar-btn.active {
+  background: #e8f0fe;
+  color: #1677ff;
+}
+
+/* Content Area */
+.medium-content {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 40px 24px 120px;
+}
+
+/* Featured Image */
+.medium-featured-image {
+  position: relative;
+  margin-bottom: 32px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.medium-featured-image img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.medium-image-actions {
+  margin-bottom: 24px;
+}
+
+/* Title Input */
+.medium-title-input {
+  font-size: 42px !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em;
+  color: #1a1a1a !important;
+  padding: 0 !important;
+  margin-bottom: 24px;
+  resize: none !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+.medium-title-input::placeholder {
+  color: #ccc !important;
+}
+
+/* ProseMirror (Editor Content) */
+.ProseMirror {
+  outline: none;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #ccc;
+  content: 'Tell your story...';
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror h1 {
+  font-size: 2em;
+  font-weight: 700;
+  margin: 1.2em 0 0.4em;
+  color: #1a1a1a;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 1em 0 0.3em;
+  color: #1a1a1a;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  color: #1a1a1a;
+}
+
+.ProseMirror p {
+  margin: 0.6em 0;
+  line-height: 1.8;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5em;
+  margin: 0.6em 0;
+}
+
+.ProseMirror li {
+  margin: 0.3em 0;
+}
+
+.ProseMirror blockquote {
+  border-left: 3px solid #1a1a1a;
+  padding-left: 20px;
+  margin: 1.5em 0;
+  color: #555;
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+.ProseMirror pre {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 8px;
+  padding: 20px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.875em;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.ProseMirror code {
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.875em;
+  color: #e11d48;
+}
+
+.ProseMirror pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 1.5em 0;
+}
+
+.ProseMirror hr {
+  border: none;
+  text-align: center;
+  margin: 2em 0;
+}
+
+.ProseMirror hr::before {
+  content: '...';
+  font-size: 28px;
+  letter-spacing: 0.6em;
+  color: #bbb;
+}
+
+.ProseMirror a {
+  color: #1677ff;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .medium-content {
+    padding: 24px 16px 80px;
+  }
+
+  .medium-title-input {
+    font-size: 28px !important;
+  }
+
+  .medium-toolbar-container {
+    padding: 6px 12px;
+  }
+
+  .ProseMirror {
+    font-size: 16px;
+  }
+}

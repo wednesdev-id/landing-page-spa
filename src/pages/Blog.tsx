@@ -26,7 +26,7 @@ export default function Blog() {
     useEffect(() => {
         axios.get('http://localhost:3001/api/posts')
             .then(res => {
-                setPosts(res.data);
+                setPosts(Array.isArray(res.data) ? res.data : []);
                 setLoading(false);
             })
             .catch(err => {
@@ -54,12 +54,13 @@ export default function Blog() {
             </Header>
 
             <Content className="px-4 py-8 md:px-12 md:py-12 max-w-7xl mx-auto w-full">
-                <Breadcrumb className="mb-8">
-                    <Breadcrumb.Item>
-                        <Link to="/">Home</Link>
-                    </Breadcrumb.Item>
-                    <Breadcrumb.Item>Blog</Breadcrumb.Item>
-                </Breadcrumb>
+                <Breadcrumb
+                    className="mb-8"
+                    items={[
+                        { title: <Link to="/">Home</Link> },
+                        { title: 'Blog' },
+                    ]}
+                />
 
                 <div className="text-center mb-12">
                     <Title level={1} className="!mb-4">Our Latest Insights</Title>
@@ -70,11 +71,13 @@ export default function Blog() {
 
                 {loading ? (
                     <div className="text-center py-20">
-                        <Spin size="large" tip="Loading posts..." />
+                        <Spin size="large" tip="Loading posts...">
+                            <div className="p-12" />
+                        </Spin>
                     </div>
                 ) : (
                     <Row gutter={[24, 24]}>
-                        {posts.map(post => (
+                        {Array.isArray(posts) && posts.map(post => (
                             <Col xs={24} sm={12} lg={8} key={post.id}>
                                 <Link to={`/blog/${post.slug}`}>
                                     <Card
@@ -95,7 +98,7 @@ export default function Blog() {
                                             )
                                         }
                                         className="h-full flex flex-col overflow-hidden rounded-xl border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300"
-                                        bodyStyle={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+                                        styles={{ body: { flex: 1, display: 'flex', flexDirection: 'column' } }}
                                     >
                                         <div className="mb-2">
                                             <Tag color="blue">Article</Tag>

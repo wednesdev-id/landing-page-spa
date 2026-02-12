@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Typography, Spin, Layout, Breadcrumb, Avatar, Divider, Space, ConfigProvider } from 'antd';
+import { Typography, Spin, Layout, Breadcrumb, Divider, Space } from 'antd';
 import { CalendarOutlined, UserOutlined, ClockCircleOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import SEO from '../components/SEO';
 import spaPos09 from '../assets/spa-pos-09.png';
 
-const { Title, Paragraph, Text } = Typography;
+const { Title, Text } = Typography;
 const { Content, Header, Footer } = Layout;
 
 interface Post {

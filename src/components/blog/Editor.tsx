@@ -1,128 +1,364 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
+import TiptapImage from '@tiptap/extension-image';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {
+    Input,
+    Button,
+    Space,
+    Typography,
+    Divider,
+    Modal,
+    Tooltip,
+    message,
+    Upload,
+} from 'antd';
+import {
+    BoldOutlined,
+    ItalicOutlined,
+    StrikethroughOutlined,
+    OrderedListOutlined,
+    UnorderedListOutlined,
+    UndoOutlined,
+    RedoOutlined,
+    MinusOutlined,
+    CodeOutlined,
+    PictureOutlined,
+    SendOutlined,
+    LinkOutlined,
+    UploadOutlined,
+} from '@ant-design/icons';
 
-interface EditorProps {
-    onSave?: (post: { title: string; slug: string; content: string; excerpt: string; image: string }) => void;
+const { Text } = Typography;
+
+// --- Slug Generator ---
+function generateSlug(title: string): string {
+    return title
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/[\s]+/g, '-')
+        .replace(/(^-|-$)+/g, '')
+        .substring(0, 80);
 }
 
-export default function BlogEditor({ onSave }: EditorProps) {
+// --- Toolbar ---
+function EditorToolbar({ editor }: { editor: any }) {
+    if (!editor) return null;
+
+    const [imageModalOpen, setImageModalOpen] = useState(false);
+    const [imageUrl, setImageUrl] = useState('');
+
+    const addImage = () => {
+        if (imageUrl) {
+            editor.chain().focus().setImage({ src: imageUrl }).run();
+            setImageUrl('');
+            setImageModalOpen(false);
+        }
+    };
+
+    const tools = [
+        {
+            icon: <BoldOutlined />,
+            title: 'Bold',
+            action: () => editor.chain().focus().toggleBold().run(),
+            active: editor.isActive('bold'),
+        },
+        {
+            icon: <ItalicOutlined />,
+            title: 'Italic',
+            action: () => editor.chain().focus().toggleItalic().run(),
+            active: editor.isActive('italic'),
+        },
+        {
+            icon: <StrikethroughOutlined />,
+            title: 'Strikethrough',
+            action: () => editor.chain().focus().toggleStrike().run(),
+            active: editor.isActive('strike'),
+        },
+        { type: 'divider' },
+        {
+            icon: <span style={{ fontWeight: 700, fontSize: 13 }}>H1</span>,
+            title: 'Heading 1',
+            action: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
+            active: editor.isActive('heading', { level: 1 }),
+        },
+        {
+            icon: <span style={{ fontWeight: 700, fontSize: 12 }}>H2</span>,
+            title: 'Heading 2',
+            action: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
+            active: editor.isActive('heading', { level: 2 }),
+        },
+        {
+            icon: <span style={{ fontWeight: 700, fontSize: 11 }}>H3</span>,
+            title: 'Heading 3',
+            action: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
+            active: editor.isActive('heading', { level: 3 }),
+        },
+        { type: 'divider' },
+        {
+            icon: <UnorderedListOutlined />,
+            title: 'Bullet List',
+            action: () => editor.chain().focus().toggleBulletList().run(),
+            active: editor.isActive('bulletList'),
+        },
+        {
+            icon: <OrderedListOutlined />,
+            title: 'Ordered List',
+            action: () => editor.chain().focus().toggleOrderedList().run(),
+            active: editor.isActive('orderedList'),
+        },
+        {
+            icon: <CodeOutlined />,
+            title: 'Code Block',
+            action: () => editor.chain().focus().toggleCodeBlock().run(),
+            active: editor.isActive('codeBlock'),
+        },
+        {
+            icon: <MinusOutlined />,
+            title: 'Divider',
+            action: () => editor.chain().focus().setHorizontalRule().run(),
+            active: false,
+        },
+        { type: 'divider' },
+        {
+            icon: <PictureOutlined />,
+            title: 'Image',
+            action: () => setImageModalOpen(true),
+            active: false,
+        },
+        { type: 'divider' },
+        {
+            icon: <UndoOutlined />,
+            title: 'Undo',
+            action: () => editor.chain().focus().undo().run(),
+            active: false,
+        },
+        {
+            icon: <RedoOutlined />,
+            title: 'Redo',
+            action: () => editor.chain().focus().redo().run(),
+            active: false,
+        },
+    ];
+
+    return (
+        <>
+            <div className="editor-toolbar">
+                {tools.map((item: any, i) =>
+                    item.type === 'divider' ? (
+                        <Divider key={i} orientation="vertical" style={{ margin: '0 2px', height: 20 }} />
+                    ) : (
+                        <Tooltip title={item.title} key={i}>
+                            <button
+                                type="button"
+                                className={`toolbar-btn${item.active ? ' active' : ''}`}
+                                onClick={item.action}
+                            >
+                                {item.icon}
+                            </button>
+                        </Tooltip>
+                    )
+                )}
+            </div>
+
+            <Modal
+                title="Insert Image"
+                open={imageModalOpen}
+                onCancel={() => setImageModalOpen(false)}
+                onOk={addImage}
+                okText="Insert"
+            >
+                <Space orientation="vertical" style={{ width: '100%' }} size="middle">
+                    <Input
+                        prefix={<LinkOutlined />}
+                        placeholder="https://example.com/image.jpg"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                        onPressEnter={addImage}
+                    />
+                    <Divider style={{ margin: '4px 0' }}>or</Divider>
+                    <Upload.Dragger
+                        name="file"
+                        multiple={false}
+                        showUploadList={false}
+                        customRequest={({ onSuccess }) => {
+                            message.info('S3/Supabase upload coming soon.');
+                            if (onSuccess) onSuccess('ok');
+                        }}
+                    >
+                        <p className="ant-upload-drag-icon">
+                            <UploadOutlined style={{ fontSize: 28, color: '#bbb' }} />
+                        </p>
+                        <p className="ant-upload-text">Drop image or click to upload</p>
+                        <p className="ant-upload-hint">S3/Supabase integration coming soon</p>
+                    </Upload.Dragger>
+                </Space>
+            </Modal>
+        </>
+    );
+}
+
+// --- Main Editor ---
+export default function BlogEditor() {
     const [title, setTitle] = useState('');
-    const [slug, setSlug] = useState('');
-    const [excerpt, setExcerpt] = useState('');
     const [featuredImage, setFeaturedImage] = useState('');
+    const [imageModalOpen, setImageModalOpen] = useState(false);
+    const [publishing, setPublishing] = useState(false);
+    const navigate = useNavigate();
 
     const editor = useEditor({
-        extensions: [
-            StarterKit,
-            Image,
-        ],
-        content: '<p>Start writing your amazing story...</p>',
+        extensions: [StarterKit, TiptapImage],
+        content: '',
         editorProps: {
             attributes: {
-                class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none min-h-[300px]',
+                class: 'medium-editor',
             },
         },
     });
 
-    const handleSave = async () => {
-        if (!editor) return;
-
-        const content = editor.getHTML();
-        const postData = {
-            title,
-            slug,
-            excerpt,
-            image: featuredImage,
-            content,
-        };
-
-        if (onSave) {
-            onSave(postData);
-        } else {
-            // Default save behavior if no prop provided
-            try {
-                await axios.post('http://localhost:3001/api/posts', { ...postData, published: true });
-                alert('Post published successfully!');
-                // Reset form or redirect
-                setTitle('');
-                setSlug('');
-                setExcerpt('');
-                setFeaturedImage('');
-                editor.commands.setContent('<p>Start writing...</p>');
-            } catch (error) {
-                console.error(error);
-                alert('Failed to publish post');
-            }
+    const handlePublish = useCallback(async () => {
+        if (!editor || !title.trim()) {
+            message.warning('Please enter a title.');
+            return;
         }
-    };
+
+        setPublishing(true);
+        const content = editor.getHTML();
+        const slug = generateSlug(title);
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = content;
+        const excerpt = (tempDiv.textContent || '').substring(0, 160).trim();
+
+        try {
+            await axios.post('/api/posts', {
+                title,
+                slug,
+                content,
+                excerpt,
+                image: featuredImage || null,
+                published: true,
+            });
+            message.success('Published!');
+            navigate('/dashboard/posts');
+        } catch (error: any) {
+            message.error(error?.response?.data?.error || 'Failed to publish.');
+        } finally {
+            setPublishing(false);
+        }
+    }, [editor, title, featuredImage, navigate]);
 
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-6">Create New Post</h2>
-
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Title</label>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value);
-                        setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
-                    }}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Enter post title"
-                />
-            </div>
-
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Slug</label>
-                <input
-                    type="text"
-                    value={slug}
-                    onChange={(e) => setSlug(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="post-url-slug"
-                />
-            </div>
-
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Excerpt</label>
-                <textarea
-                    value={excerpt}
-                    onChange={(e) => setExcerpt(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Short summary for SEO and previews"
-                    rows={3}
-                />
-            </div>
-
-            <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Featured Image URL</label>
-                <input
-                    type="text"
-                    value={featuredImage}
-                    onChange={(e) => setFeaturedImage(e.target.value)}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="https://example.com/image.jpg"
-                />
-            </div>
-
-            <div className="mb-6 border rounded p-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2">Content</label>
-                <div className="border p-2 min-h-[200px] rounded">
-                    <EditorContent editor={editor} />
+        <div className="medium-editor-wrapper">
+            {/* Sticky Toolbar */}
+            <div className="medium-toolbar-container">
+                <div className="medium-toolbar-inner">
+                    <EditorToolbar editor={editor} />
+                    <Button
+                        type="primary"
+                        icon={<SendOutlined />}
+                        onClick={handlePublish}
+                        loading={publishing}
+                        style={{ borderRadius: 20, fontWeight: 600 }}
+                    >
+                        Publish
+                    </Button>
                 </div>
             </div>
 
-            <button
-                onClick={handleSave}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            {/* Content Area */}
+            <div className="medium-content">
+                {/* Featured Image */}
+                {featuredImage && (
+                    <div className="medium-featured-image">
+                        <img src={featuredImage} alt="Featured" />
+                        <Button
+                            size="small"
+                            danger
+                            onClick={() => setFeaturedImage('')}
+                            style={{ position: 'absolute', top: 12, right: 12 }}
+                        >
+                            Remove
+                        </Button>
+                    </div>
+                )}
+
+                <div className="medium-image-actions">
+                    {!featuredImage && (
+                        <Space>
+                            <Button
+                                icon={<PictureOutlined />}
+                                onClick={() => setImageModalOpen(true)}
+                                size="small"
+                                type="dashed"
+                            >
+                                Add cover image
+                            </Button>
+                        </Space>
+                    )}
+                </div>
+
+                {/* Title */}
+                <Input.TextArea
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    variant="borderless"
+                    autoSize
+                    className="medium-title-input"
+                />
+
+                {/* Tiptap Editor — this IS the live preview */}
+                <EditorContent editor={editor} />
+            </div>
+
+            {/* Featured Image URL Modal */}
+            <Modal
+                title="Cover Image"
+                open={imageModalOpen}
+                onCancel={() => setImageModalOpen(false)}
+                onOk={() => setImageModalOpen(false)}
+                okText="Done"
             >
-                Publish Post
-            </button>
+                <Space orientation="vertical" style={{ width: '100%' }} size="middle">
+                    <Text type="secondary">Paste the image URL:</Text>
+                    <Input
+                        prefix={<LinkOutlined />}
+                        placeholder="https://example.com/cover.jpg"
+                        value={featuredImage}
+                        onChange={(e) => setFeaturedImage(e.target.value)}
+                    />
+                    {featuredImage && (
+                        <img
+                            src={featuredImage}
+                            alt="Preview"
+                            style={{
+                                width: '100%',
+                                maxHeight: 200,
+                                objectFit: 'cover',
+                                borderRadius: 8,
+                                border: '1px solid #f0f0f0',
+                            }}
+                        />
+                    )}
+                    <Divider style={{ margin: '4px 0' }}>or</Divider>
+                    <Upload.Dragger
+                        name="file"
+                        multiple={false}
+                        showUploadList={false}
+                        customRequest={() => {
+                            message.info('S3/Supabase upload coming soon.');
+                        }}
+                    >
+                        <p className="ant-upload-drag-icon">
+                            <UploadOutlined style={{ fontSize: 28, color: '#bbb' }} />
+                        </p>
+                        <p className="ant-upload-text">Drop image or click to upload</p>
+                        <p className="ant-upload-hint">S3/Supabase integration coming soon</p>
+                    </Upload.Dragger>
+                </Space>
+            </Modal>
         </div>
     );
 }

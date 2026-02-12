@@ -26,6 +26,12 @@ class PostRepository {
             data,
         });
     }
+
+    async delete(id: string) {
+        return prisma.post.delete({
+            where: { id },
+        });
+    }
 }
 
 export default new PostRepository();
