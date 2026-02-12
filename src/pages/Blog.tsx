@@ -24,7 +24,7 @@ export default function Blog() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/posts')
+        axios.get('/api/posts')
             .then(res => {
                 setPosts(Array.isArray(res.data) ? res.data : []);
                 setLoading(false);

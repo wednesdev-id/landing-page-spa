@@ -28,7 +28,7 @@ export default function BlogPost() {
     useEffect(() => {
         if (!slug) return;
 
-        axios.get(`http://localhost:3001/api/posts/${slug}`)
+        axios.get(`/api/posts/${slug}`)
             .then(res => {
                 setPost(res.data);
                 setLoading(false);

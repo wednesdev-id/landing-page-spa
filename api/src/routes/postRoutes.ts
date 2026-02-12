@@ -3,9 +3,9 @@ import postController from '../controllers/postController.js';
 
 const router = express.Router();
 
-router.get('/posts', postController.getAllPosts);
-router.post('/posts', postController.createPost);
-router.get('/posts/:slug', postController.getPostBySlug);
-router.delete('/posts/:id', postController.deletePost);
+router.get('/', postController.getAllPosts);
+router.post('/', postController.createPost);
+router.get('/:slug', postController.getPostBySlug);
+router.delete('/:id', postController.deletePost);
 
 export default router;

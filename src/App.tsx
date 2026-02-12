@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Main Application Component
-import { ConfigProvider } from "antd";
+import { ConfigProvider, App as AntApp } from "antd";
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from "./contexts/AuthContext";
 import LandingPage from "./pages/LandingPage";
@@ -15,22 +15,29 @@ import DashboardPosts from "./pages/DashboardPosts";
 export default function App() {
   return (
     <HelmetProvider>
-      <ConfigProvider theme={{ token: { colorPrimary: '#2563eb' } }}>
-        <AuthProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />}>
-                <Route index element={<DashboardHome />} />
-                <Route path="posts" element={<DashboardPosts />} />
-              </Route>
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/new" element={<AdminBlog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-            </Routes>
-          </Router>
-        </AuthProvider>
+      <ConfigProvider theme={{
+        token: {
+          colorPrimary: '#0f3c3e',
+          colorBgLayout: '#f8f6f2'
+        }
+      }}>
+        <AntApp>
+          <AuthProvider>
+            <Router>
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/dashboard" element={<Dashboard />}>
+                  <Route index element={<DashboardHome />} />
+                  <Route path="posts" element={<DashboardPosts />} />
+                </Route>
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/new" element={<AdminBlog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+              </Routes>
+            </Router>
+          </AuthProvider>
+        </AntApp>
       </ConfigProvider>
     </HelmetProvider>
   );

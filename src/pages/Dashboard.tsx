@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Layout, Menu, Typography, Avatar, Dropdown, Space, theme } from 'antd';
+import { Layout, Menu, Typography, Avatar, Dropdown, Space, theme, Spin } from 'antd'; // Added Spin
 import {
     DashboardOutlined,
     FileTextOutlined,
@@ -13,7 +13,7 @@ const { Header, Content, Sider } = Layout;
 const { Title, Text } = Typography;
 
 export default function Dashboard() {
-    const { user, logout, isAuthenticated } = useAuth();
+    const { user, logout, isAuthenticated, loading } = useAuth(); // Destructure loading
     const navigate = useNavigate();
     const location = useLocation();
     const {
@@ -21,10 +21,18 @@ export default function Dashboard() {
     } = theme.useToken();
 
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!loading && !isAuthenticated) { // Only redirect if NOT loading and NOT authenticated
             navigate('/login');
         }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, loading, navigate]);
+
+    if (loading) {
+        return (
+            <div className="flex h-screen w-full items-center justify-center bg-[#f8f6f2]">
+                <Spin size="large" />
+            </div>
+        );
+    }
 
     if (!isAuthenticated) {
         return null;
@@ -60,21 +68,23 @@ export default function Dashboard() {
     ];
 
     return (
-        <Layout className="min-h-screen">
+        <Layout className="min-h-screen" style={{ background: '#f8f6f2' }}>
             <Sider
                 breakpoint="lg"
                 collapsedWidth="0"
                 theme="light"
                 className="border-r border-gray-200"
+                style={{ background: '#f8f6f2' }}
             >
                 <div className="p-4 flex items-center justify-center border-b border-gray-100">
-                    <Title level={4} className="!mb-0 !text-primary">WednesDev</Title>
+                    <Title level={4} className="!mb-0" style={{ color: '#0f3c3e' }}>WednesDev</Title>
                 </div>
                 <Menu
                     mode="inline"
                     selectedKeys={[location.pathname]}
                     items={menuItems}
                     className="border-none"
+                    style={{ background: '#f8f6f2' }}
                 />
             </Sider>
             <Layout>

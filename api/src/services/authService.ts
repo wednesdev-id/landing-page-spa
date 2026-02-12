@@ -23,7 +23,7 @@ export const login = async (email: string, password: string): Promise<{ token: s
     const token = jwt.sign(
         { userId: user.id, email: user.email, role: user.role },
         JWT_SECRET,
-        { expiresIn: '24h' }
+        { expiresIn: '7d' }
     );
 
     const { password: _, ...userWithoutPassword } = user;
