@@ -37,6 +37,17 @@ class PostController {
         }
     }
 
+    async updatePost(req: Request, res: Response) {
+        const { slug } = req.params;
+        try {
+            const updatedPost = await postService.updatePost(slug as string, req.body);
+            res.json(updatedPost);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error updating post' });
+        }
+    }
+
     async deletePost(req: Request, res: Response) {
         const { id } = req.params;
         try {

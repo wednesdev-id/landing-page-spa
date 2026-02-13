@@ -6,6 +6,7 @@ interface PostData {
     slug: string;
     published?: boolean;
     image?: string | null;
+    imageCaption?: string | null;
     tags?: string[];
     scheduledAt?: string | Date | null;
 }
@@ -34,6 +35,14 @@ class PostService {
             scheduledAt: postData.scheduledAt ? new Date(postData.scheduledAt) : null,
         };
         return postRepository.create(data);
+    }
+
+    async updatePost(slug: string, postData: Partial<PostData>) {
+        const data: any = { ...postData };
+        if (postData.scheduledAt) {
+            data.scheduledAt = new Date(postData.scheduledAt);
+        }
+        return postRepository.update(slug, data);
     }
 
     async deletePost(id: string) {

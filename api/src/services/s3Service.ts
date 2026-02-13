@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand, GetObjectCommand, CreateBucketCommand, HeadBucketCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, GetObjectCommand, CreateBucketCommand, HeadBucketCommand, PutBucketPolicyCommand } from '@aws-sdk/client-s3';
 import crypto from 'crypto';
 
 const bucketName = process.env.AWS_BUCKET_NAME || 'spapos-assets';
@@ -6,21 +6,62 @@ const bucketName = process.env.AWS_BUCKET_NAME || 'spapos-assets';
 const s3Client = new S3Client({
     region: process.env.AWS_REGION || 'us-east-1',
     credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID ? process.env.AWS_ACCESS_KEY_ID.trim() : '',
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ? process.env.AWS_SECRET_ACCESS_KEY.trim() : '',
     },
-    endpoint: process.env.AWS_ENDPOINT,
+    endpoint: process.env.AWS_ENDPOINT ? process.env.AWS_ENDPOINT.replace(/\/$/, '') : undefined,
     forcePathStyle: true, // Needed for MinIO
+    requestChecksumCalculation: 'WHEN_REQUIRED', // Fix for MinIO/S3 compatible services
+    responseChecksumValidation: 'WHEN_REQUIRED', // Fix for MinIO/S3 compatible services
 });
+
+// Debug Log for S3 Configuration
+console.log('--- S3 Configuration Debug ---');
+console.log('Region:', process.env.AWS_REGION);
+console.log('Endpoint:', process.env.AWS_ENDPOINT);
+console.log('Bucket:', bucketName);
+console.log('Access Key ID:', process.env.AWS_ACCESS_KEY_ID ? `${process.env.AWS_ACCESS_KEY_ID.trim().substring(0, 5)}...` : 'Not Set');
+console.log('Secret Key Length (Original):', process.env.AWS_SECRET_ACCESS_KEY ? process.env.AWS_SECRET_ACCESS_KEY.length : 0);
+console.log('Secret Key Length (Trimmed):', process.env.AWS_SECRET_ACCESS_KEY ? process.env.AWS_SECRET_ACCESS_KEY.trim().length : 0);
+console.log('------------------------------');
 
 class S3Service {
     private isBucketChecked = false;
+
+    private async setPublicPolicy() {
+        try {
+            const policy = {
+                Version: "2012-10-17",
+                Statement: [
+                    {
+                        Sid: "PublicReadGetObject",
+                        Effect: "Allow",
+                        Principal: "*",
+                        Action: "s3:GetObject",
+                        Resource: `arn:aws:s3:::${bucketName}/*`
+                    }
+                ]
+            };
+
+            const command = new PutBucketPolicyCommand({
+                Bucket: bucketName,
+                Policy: JSON.stringify(policy)
+            });
+
+            await s3Client.send(command);
+            console.log(`Public read policy set for bucket: ${bucketName}`);
+        } catch (error) {
+            console.error('Error setting bucket policy:', error);
+        }
+    }
 
     private async ensureBucketExists() {
         if (this.isBucketChecked) return;
 
         try {
             await s3Client.send(new HeadBucketCommand({ Bucket: bucketName }));
+            // Bucket exists, ensure policy is set (idempotent-ish, good for ensuring access)
+            await this.setPublicPolicy();
             this.isBucketChecked = true;
         } catch (error: any) {
             if (error.name === 'NotFound' || error.$metadata?.httpStatusCode === 404) {
@@ -28,6 +69,7 @@ class S3Service {
                 try {
                     await s3Client.send(new CreateBucketCommand({ Bucket: bucketName }));
                     console.log(`Bucket ${bucketName} created successfully.`);
+                    await this.setPublicPolicy();
                     this.isBucketChecked = true;
                 } catch (createError) {
                     console.error('Error creating bucket:', createError);
@@ -56,7 +98,7 @@ class S3Service {
             Key: key,
             Body: file.buffer,
             ContentType: file.mimetype,
-            ACL: 'public-read', // Make file publicly accessible if supported by bucket policy
+            // ACL: 'public-read', // Commented out to prevent 403 on MinIO setups that don't support ACLs
         });
 
         try {

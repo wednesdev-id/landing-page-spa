@@ -15,6 +15,7 @@ model Post {
   excerpt   String?  @db.Text
   published Boolean  @default(false)
   image     String?
+  imageCaption String?
   tags      String[]
   scheduledAt DateTime?
   createdAt DateTime @default(now())

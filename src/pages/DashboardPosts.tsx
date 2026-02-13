@@ -112,7 +112,7 @@ export default function DashboardPosts() {
                     </Tooltip>
 
                     <Tooltip title="Edit Post">
-                        <Link to={`/dashboard/posts/edit/${record.id}`}>
+                        <Link to={`/dashboard/posts/edit/${record.slug}`}>
                             <Button type="text" icon={<EditOutlined />} size="small" className="text-orange-500 hover:text-orange-600 hover:bg-orange-50" />
                         </Link>
                     </Tooltip>

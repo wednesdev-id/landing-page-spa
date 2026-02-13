@@ -27,6 +27,13 @@ class PostRepository {
         });
     }
 
+    async update(slug: string, data: Prisma.PostUpdateInput) {
+        return prisma.post.update({
+            where: { slug },
+            data,
+        });
+    }
+
     async delete(id: string) {
         return prisma.post.delete({
             where: { id },

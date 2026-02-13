@@ -19,6 +19,7 @@ interface Post {
     content: string;
     excerpt: string;
     image?: string;
+    imageCaption?: string;
     createdAt: string;
     tags?: string[];
 }
@@ -28,10 +29,11 @@ export default function BlogPost() {
     const [post, setPost] = useState<Post | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [content, setContent] = useState('');
 
     const editor = useEditor({
         extensions: [StarterKit, TiptapImage],
-        content: post?.content || '',
+        content: content, // Use modified content
         editable: false, // Read-only mode
         editorProps: {
             attributes: {
@@ -40,15 +42,37 @@ export default function BlogPost() {
         },
     });
 
+    // Update editor content when content state changes
+    useEffect(() => {
+        if (editor && content) {
+            editor.commands.setContent(content);
+        }
+    }, [content, editor]);
+
     useEffect(() => {
         if (!slug) return;
 
         axios.get(`/api/posts/${slug}`)
             .then(res => {
-                setPost(res.data);
-                if (editor) {
-                    editor.commands.setContent(res.data.content);
+                const postData: Post = res.data;
+                setPost(postData);
+
+                // Content Deduplication Logic
+                let processedContent = postData.content;
+                if (postData.image) {
+                    // Parse content to find first image
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(postData.content, 'text/html');
+                    const firstImg = doc.querySelector('img');
+
+                    // If first image src matches cover image, remove it
+                    if (firstImg && firstImg.src === postData.image) {
+                        firstImg.remove();
+                        processedContent = doc.body.innerHTML;
+                    }
                 }
+
+                setContent(processedContent);
                 setLoading(false);
             })
             .catch(err => {
@@ -56,7 +80,7 @@ export default function BlogPost() {
                 setError('Post not found');
                 setLoading(false);
             });
-    }, [slug, editor]);
+    }, [slug]);
 
     if (loading) return (
         <div className="flex justify-center items-center min-h-screen bg-mara-background">
@@ -137,12 +161,19 @@ export default function BlogPost() {
 
                     {/* Featured Image */}
                     {post.image && (
-                        <div className="mb-14 rounded-2xl overflow-hidden shadow-2xl shadow-mara-primary/10 ring-1 ring-black/5">
-                            <img
-                                src={post.image}
-                                alt={post.title}
-                                className="w-full h-auto object-cover max-h-[600px] transform hover:scale-105 transition-transform duration-700"
-                            />
+                        <div className="mb-14">
+                            <div className="rounded-2xl overflow-hidden shadow-2xl shadow-mara-primary/10 ring-1 ring-black/5">
+                                <img
+                                    src={post.image}
+                                    alt={post.title}
+                                    className="w-full h-auto object-cover max-h-[600px] transform hover:scale-105 transition-transform duration-700"
+                                />
+                            </div>
+                            {post.imageCaption && (
+                                <div className="text-center mt-3 text-sm text-gray-500 italic font-serif">
+                                    {post.imageCaption}
+                                </div>
+                            )}
                         </div>
                     )}
 

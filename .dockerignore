@@ -1,0 +1,7 @@
+node_modules
+dist
+api/node_modules
+.git
+.env
+.DS_Store
+infrastructure

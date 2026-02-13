@@ -2,8 +2,8 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import TiptapImage from '@tiptap/extension-image';
 import axios from 'axios';
-import { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useCallback, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
     Input,
     Button,
@@ -12,7 +12,7 @@ import {
     Divider,
     Modal,
     Tooltip,
-    message,
+    App, // Import App for useApp
     Upload,
     DatePicker,
     Select,
@@ -32,7 +32,7 @@ import {
     SendOutlined,
     UploadOutlined,
 } from '@ant-design/icons';
-import dayjs from 'dayjs'; // Ensure dayjs is available or use standard Date if not. AntD DatePicker uses dayjs by default in v5.
+import dayjs from 'dayjs';
 
 const { Text } = Typography;
 
@@ -47,7 +47,7 @@ function generateSlug(title: string): string {
 }
 
 // --- Toolbar ---
-function EditorToolbar({ editor }: { editor: any }) {
+function EditorToolbar({ editor, messageApi }: { editor: any, messageApi: any }) {
     if (!editor) return null;
 
     const [imageModalOpen, setImageModalOpen] = useState(false);
@@ -183,19 +183,36 @@ function EditorToolbar({ editor }: { editor: any }) {
                     />
                     <Divider style={{ margin: '4px 0' }}>or</Divider>
                     <Upload.Dragger
-                        name="file"
+                        name="image"
                         multiple={false}
                         showUploadList={false}
-                        customRequest={({ onSuccess }) => {
-                            message.info('S3/Supabase upload coming soon.');
-                            if (onSuccess) onSuccess('ok');
+                        customRequest={async ({ file, onSuccess, onError }) => {
+                            try {
+                                const formData = new FormData();
+                                formData.append('image', file as Blob);
+
+                                messageApi.loading({ content: 'Uploading...', key: 'upload' });
+                                const response = await axios.post('/api/upload', formData, {
+                                    headers: { 'Content-Type': 'multipart/form-data' },
+                                });
+
+                                const url = response.data.url;
+                                if (imageModalOpen) setImageUrl(url);
+
+                                messageApi.success({ content: 'Image uploaded successfully!', key: 'upload' });
+                                if (onSuccess) onSuccess('ok');
+                            } catch (error: any) {
+                                console.error('Upload failed:', error);
+                                messageApi.error({ content: 'Upload failed.', key: 'upload' });
+                                if (onError) onError(error);
+                            }
                         }}
                     >
                         <p className="ant-upload-drag-icon">
                             <UploadOutlined style={{ fontSize: 28, color: '#bbb' }} />
                         </p>
                         <p className="ant-upload-text">Drop image or click to upload</p>
-                        <p className="ant-upload-hint">S3/Supabase integration coming soon</p>
+                        <p className="ant-upload-hint">Uploads to S3 Storage</p>
                     </Upload.Dragger>
                 </Space>
             </Modal>
@@ -205,14 +222,18 @@ function EditorToolbar({ editor }: { editor: any }) {
 
 // --- Main Editor ---
 export default function BlogEditor() {
+    const { message: messageApi } = App.useApp(); // Use context-aware message
     const [title, setTitle] = useState('');
     const [featuredImage, setFeaturedImage] = useState('');
+    const [imageCaption, setImageCaption] = useState('');
     const [imageModalOpen, setImageModalOpen] = useState(false);
-    const [publishModalOpen, setPublishModalOpen] = useState(false); // New Modal State
+    const [publishModalOpen, setPublishModalOpen] = useState(false);
     const [publishing, setPublishing] = useState(false);
-    const [tags, setTags] = useState<string[]>([]); // New Tags State
-    const [scheduledAt, setScheduledAt] = useState<dayjs.Dayjs | null>(null); // New Schedule State
+    const [tags, setTags] = useState<string[]>([]);
+    const [scheduledAt, setScheduledAt] = useState<dayjs.Dayjs | null>(null);
+    const [availableImages, setAvailableImages] = useState<string[]>([]);
     const navigate = useNavigate();
+    const { slug: urlSlug } = useParams();
 
     const editor = useEditor({
         extensions: [StarterKit, TiptapImage],
@@ -221,53 +242,153 @@ export default function BlogEditor() {
             attributes: {
                 class: 'medium-editor',
             },
+            handlePaste: (view, event) => {
+                const items = Array.from(event.clipboardData?.items || []);
+                const item = items.find(item => item.type.indexOf('image') === 0);
+
+                if (item) {
+                    event.preventDefault();
+                    const file = item.getAsFile();
+                    if (!file) return false;
+
+                    const formData = new FormData();
+                    formData.append('image', file);
+
+                    messageApi.loading({ content: 'Uploading pasted image...', key: 'paste-upload' });
+
+                    axios.post('/api/upload', formData, {
+                        headers: { 'Content-Type': 'multipart/form-data' },
+                    }).then(response => {
+                        const url = response.data.url;
+                        if (url) {
+                            const { schema } = view.state;
+                            const node = schema.nodes.image.create({ src: url });
+                            const transaction = view.state.tr.replaceSelectionWith(node);
+                            view.dispatch(transaction);
+                            messageApi.success({ content: 'Image pasted!', key: 'paste-upload' });
+                        }
+                    }).catch(err => {
+                        console.error('Paste upload failed:', err);
+                        messageApi.error({ content: 'Failed to upload pasted image.', key: 'paste-upload' });
+                    });
+
+                    return true;
+                }
+                return false;
+            }
         },
     });
 
+    // Fetch existing post if editing
+    useEffect(() => {
+        if (urlSlug && editor) {
+            axios.get(`/api/posts/${urlSlug}`)
+                .then(res => {
+                    const post = res.data;
+                    setTitle(post.title);
+                    setFeaturedImage(post.image || '');
+                    setImageCaption(post.imageCaption || '');
+                    setTags(post.tags || []);
+                    setScheduledAt(post.scheduledAt ? dayjs(post.scheduledAt) : null);
+
+                    let contentToSet = post.content;
+                    if (post.image) {
+                        // Parse content to find first image
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(post.content, 'text/html');
+                        const firstImg = doc.querySelector('img');
+
+                        // If first image src matches cover image, remove it
+                        if (firstImg && firstImg.src === post.image) {
+                            firstImg.remove();
+                            contentToSet = doc.body.innerHTML;
+                        }
+                    }
+
+                    if (editor && !editor.isDestroyed) {
+                        editor.commands.setContent(contentToSet);
+                    }
+                })
+                .catch(err => {
+                    console.error('Failed to fetch post details', err);
+                    messageApi.error('Failed to load post for editing');
+                });
+        }
+    }, [urlSlug, editor, messageApi]);
+
+    // Extract images from content
+    const extractImagesFromContent = useCallback(() => {
+        if (!editor) return [];
+        const content = editor.getHTML();
+        const doc = new DOMParser().parseFromString(content, 'text/html');
+        const images = Array.from(doc.querySelectorAll('img')).map(img => img.src);
+        return images;
+    }, [editor]);
+
+    // Handle opening publish modal logic
+    const handleOpenPublishModal = () => {
+        const images = extractImagesFromContent();
+        setAvailableImages(images);
+
+        // Auto-select first image if no cover image is set
+        if (!featuredImage && images.length > 0) {
+            setFeaturedImage(images[0]);
+        }
+
+        setPublishModalOpen(true);
+    };
+
     const handlePublish = useCallback(async () => {
         if (!editor || !title.trim()) {
-            message.warning('Please enter a title.');
+            messageApi.warning('Please enter a title.');
             return;
         }
 
         setPublishing(true);
         const content = editor.getHTML();
-        const slug = generateSlug(title);
+        const newSlug = generateSlug(title);
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = content;
         const excerpt = (tempDiv.textContent || '').substring(0, 160).trim();
 
         try {
-            await axios.post('/api/posts', {
+            const payload = {
                 title,
-                slug,
+                slug: newSlug,
                 content,
                 excerpt,
                 image: featuredImage || null,
-                published: true, // Always true if "Published" or "Scheduled" (logic handled by backend/frontend display)
+                imageCaption: imageCaption || null,
+                published: true,
                 tags,
                 scheduledAt: scheduledAt ? scheduledAt.toISOString() : null,
-            });
-            message.success('Published!');
+            };
+
+            if (urlSlug) {
+                await axios.put(`/api/posts/${urlSlug}`, payload);
+                messageApi.success('Post updated!');
+            } else {
+                await axios.post('/api/posts', payload);
+                messageApi.success('Published!');
+            }
             navigate('/dashboard/posts');
         } catch (error: any) {
-            message.error(error?.response?.data?.error || 'Failed to publish.');
+            messageApi.error(error?.response?.data?.error || 'Failed to save.');
         } finally {
             setPublishing(false);
             setPublishModalOpen(false);
         }
-    }, [editor, title, featuredImage, tags, scheduledAt, navigate]);
+    }, [editor, title, featuredImage, imageCaption, tags, scheduledAt, navigate, urlSlug, messageApi]);
 
     return (
         <div className="medium-editor-wrapper">
-            {/* Sticky Toolbar */}
             <div className="medium-toolbar-container">
                 <div className="medium-toolbar-inner">
-                    <EditorToolbar editor={editor} />
+                    <EditorToolbar editor={editor} messageApi={messageApi} />
                     <Button
                         type="primary"
                         icon={<SendOutlined />}
-                        onClick={() => setPublishModalOpen(true)} // Open Modal instead of direct publish
+                        onClick={handleOpenPublishModal}
                         style={{ borderRadius: 20, fontWeight: 600 }}
                     >
                         Publish
@@ -275,21 +396,27 @@ export default function BlogEditor() {
                 </div>
             </div>
 
-            {/* Content Area */}
             <div className="medium-content">
-                {/* ... (Keep existing content area for Image and Title) ... */}
-                {/* Featured Image */}
                 {featuredImage && (
                     <div className="medium-featured-image">
                         <img src={featuredImage} alt="Featured" />
                         <Button
                             size="small"
                             danger
-                            onClick={() => setFeaturedImage('')}
+                            onClick={() => {
+                                setFeaturedImage('');
+                                setImageCaption('');
+                            }}
                             style={{ position: 'absolute', top: 12, right: 12 }}
                         >
                             Remove
                         </Button>
+                        {/* Simplified caption display in editor for visual feedback */}
+                        {imageCaption && (
+                            <Text type="secondary" style={{ display: 'block', textAlign: 'center', marginTop: 8, fontSize: 13 }}>
+                                {imageCaption}
+                            </Text>
+                        )}
                     </div>
                 )}
 
@@ -308,7 +435,6 @@ export default function BlogEditor() {
                     )}
                 </div>
 
-                {/* Title */}
                 <Input.TextArea
                     placeholder="Title"
                     value={title}
@@ -318,11 +444,9 @@ export default function BlogEditor() {
                     className="medium-title-input"
                 />
 
-                {/* Tiptap Editor — this IS the live preview */}
                 <EditorContent editor={editor} />
             </div>
 
-            {/* Featured Image URL Modal */}
             <Modal
                 title="Cover Image"
                 open={imageModalOpen}
@@ -330,7 +454,6 @@ export default function BlogEditor() {
                 onOk={() => setImageModalOpen(false)}
                 okText="Done"
             >
-                {/* ... (Keep existing image modal content) ... */}
                 <Space orientation="vertical" style={{ width: '100%' }} size="middle">
                     <Text type="secondary">Paste the image URL:</Text>
                     <Input
@@ -339,11 +462,42 @@ export default function BlogEditor() {
                         value={featuredImage}
                         onChange={(e) => setFeaturedImage(e.target.value)}
                     />
-                    {/* ... (rest of image modal) ... */}
+                    <Divider style={{ margin: '4px 0' }}>or</Divider>
+                    <Upload.Dragger
+                        name="coverImage"
+                        multiple={false}
+                        showUploadList={false}
+                        customRequest={async ({ file, onSuccess, onError }) => {
+                            try {
+                                const formData = new FormData();
+                                formData.append('image', file as Blob);
+
+                                messageApi.loading({ content: 'Uploading cover...', key: 'cover-upload' });
+                                const response = await axios.post('/api/upload', formData, {
+                                    headers: { 'Content-Type': 'multipart/form-data' },
+                                });
+
+                                const url = response.data.url;
+                                setFeaturedImage(url);
+                                messageApi.success({ content: 'Cover uploaded!', key: 'cover-upload' });
+                                if (onSuccess) onSuccess('ok');
+                                setImageModalOpen(false);
+                            } catch (error: any) {
+                                console.error('Upload failed:', error);
+                                messageApi.error({ content: 'Upload failed.', key: 'cover-upload' });
+                                if (onError) onError(error);
+                            }
+                        }}
+                    >
+                        <p className="ant-upload-drag-icon">
+                            <UploadOutlined style={{ fontSize: 28, color: '#bbb' }} />
+                        </p>
+                        <p className="ant-upload-text">Drop image or click to upload</p>
+                        <p className="ant-upload-hint">Uploads to S3 Storage</p>
+                    </Upload.Dragger>
                 </Space>
             </Modal>
 
-            {/* Publish Settings Modal */}
             <Modal
                 title="Publish Settings"
                 open={publishModalOpen}
@@ -351,8 +505,73 @@ export default function BlogEditor() {
                 onOk={handlePublish}
                 confirmLoading={publishing}
                 okText={scheduledAt ? 'Schedule' : 'Publish Now'}
+                width={600}
             >
                 <Space orientation="vertical" style={{ width: '100%' }} size="middle">
+
+                    {/* Cover Image Selection Section */}
+                    <div>
+                        <Text strong>Cover Image</Text>
+                        <div style={{ marginTop: 8, marginBottom: 8 }}>
+                            {featuredImage ? (
+                                <div style={{ position: 'relative', marginBottom: 10 }}>
+                                    <img
+                                        src={featuredImage}
+                                        alt="Cover"
+                                        style={{ width: '100%', maxHeight: 200, objectFit: 'cover', borderRadius: 8 }}
+                                    />
+                                    <Button
+                                        size="small"
+                                        danger
+                                        style={{ position: 'absolute', top: 8, right: 8 }}
+                                        onClick={() => {
+                                            setFeaturedImage('');
+                                            setImageCaption('');
+                                        }}
+                                    >
+                                        Remove
+                                    </Button>
+                                </div>
+                            ) : (
+                                <div style={{ padding: 20, background: '#f5f5f5', borderRadius: 8, textAlign: 'center', color: '#888' }}>
+                                    No cover image selected.
+                                </div>
+                            )}
+
+                            {availableImages.length > 0 && (
+                                <div style={{ marginTop: 10 }}>
+                                    <Text type="secondary" style={{ fontSize: 12, marginBottom: 5, display: 'block' }}>Select from post images:</Text>
+                                    <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 5 }}>
+                                        {availableImages.map((img, idx) => (
+                                            <div
+                                                key={idx}
+                                                onClick={() => setFeaturedImage(img)}
+                                                style={{
+                                                    cursor: 'pointer',
+                                                    border: featuredImage === img ? '2px solid #1890ff' : '2px solid transparent',
+                                                    borderRadius: 4,
+                                                    overflow: 'hidden',
+                                                    flexShrink: 0
+                                                }}
+                                            >
+                                                <img src={img} alt={`Content ${idx}`} style={{ width: 60, height: 60, objectFit: 'cover' }} />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        <Input
+                            placeholder="Add a caption for the cover image (optional)"
+                            value={imageCaption}
+                            onChange={(e) => setImageCaption(e.target.value)}
+                            style={{ fontSize: 13, color: '#666' }}
+                        />
+                    </div>
+
+                    <Divider style={{ margin: '12px 0' }} />
+
                     <div>
                         <Text strong>Schedule Publish (Optional)</Text>
                         <DatePicker
@@ -382,3 +601,4 @@ export default function BlogEditor() {
         </div>
     );
 }
+
