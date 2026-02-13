@@ -85,12 +85,18 @@ case "$1" in
     docker:web)
         echo "Starting Docker (Web Only)..."
         echo "Connecting to services defined in .env..."
-        docker compose --env-file .env -f infrastructure/docker-compose.yml up --build
+        set -a
+        source .env
+        set +a
+        docker compose -f infrastructure/docker-compose.yml up --build
         ;;
     docker:local)
         echo "Starting Docker (Full Stack Local)..."
         echo "Starting local Postgres and MinIO..."
-        docker compose --env-file .env -f infrastructure/docker-compose.yml -f infrastructure/docker-compose.local.yml up --build
+        set -a
+        source .env
+        set +a
+        docker compose -f infrastructure/docker-compose.yml -f infrastructure/docker-compose.local.yml up --build
         ;;
     docker:down)
         echo "Stopping Docker containers..."
