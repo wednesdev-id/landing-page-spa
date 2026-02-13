@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import DashboardHome from "./pages/DashboardHome";
 import DashboardPosts from "./pages/DashboardPosts";
+import Contact from "./pages/Contact";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
                   <Route path="posts" element={<DashboardPosts />} />
                 </Route>
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/blog/new" element={<AdminBlog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
               </Routes>

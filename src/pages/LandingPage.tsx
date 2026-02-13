@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 import SEO from '../components/SEO';
 import spaPos09 from '../assets/spa-pos-09.png';
+import coverageMap from '../assets/coverage-map.png';
 import Navbar from '../components/layout/Navbar';
 import './LandingPage.css';
 
-// Get dashboard URL from environment variable or use default
-const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || 'http://localhost:5173';
+// Interface for Blog Post
+interface BlogPost {
+    id: string;
+    title: string;
+    excerpt: string;
+    coverImage?: string;
+    image?: string;
+    date?: string;
+    createdAt?: string;
+    slug: string;
+}
 
 // Icons as simple SVG components for clean look
 const CalendarIcon = () => (
@@ -44,16 +53,47 @@ const ClipboardIcon = () => (
 );
 
 const LandingPage: React.FC = () => {
-    const { isAuthenticated } = useAuth();
+    const [posts, setPosts] = useState<BlogPost[]>([]);
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                // Determine API URL based on environment or default to localhost
+                // Assuming the API is running on localhost:3001 as seen in Blog.tsx
+                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+                const response = await fetch(`${apiUrl}/posts`);
+
+                if (response.ok) {
+                    const data = await response.json();
+                    // Sort by date desc if needed, but usually API returns sorted
+                    // Take latest 3
+                    setPosts(data.slice(0, 3));
+                }
+            } catch (error) {
+                console.error('Error fetching posts for landing page:', error);
+            }
+        };
+
+        fetchPosts();
+    }, []);
 
     const handleGetStarted = () => {
-        // Redirect to dashboard (separate application)
-        if (isAuthenticated) {
-            window.location.href = `${DASHBOARD_URL}/app/dashboard`;
-        } else {
-            // Navigate to login with register mode
-            window.location.href = `${DASHBOARD_URL}/login?mode=register`;
-        }
+        // Redirect to dashboard login
+        window.location.href = 'https://dashboard.spapos.id/login';
+    };
+
+    const handleSubscribe = (plan: string) => {
+        const message = `Halo, saya tertarik dengan paket ${plan} SPAPOSPLUS. Mohon info lebih lanjut.`;
+        window.open(`https://wa.me/6281339691260?text=${encodeURIComponent(message)}`, '_blank');
+    };
+
+    // Helper to get image source
+    const getPostImage = (post: BlogPost) => post.coverImage || post.image || 'https://placehold.co/600x400?text=No+Image';
+
+    // Helper to get date
+    const getPostDate = (post: BlogPost) => {
+        const dateStr = post.date || post.createdAt || new Date().toISOString();
+        return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
     };
 
     const features = [
@@ -79,12 +119,7 @@ const LandingPage: React.FC = () => {
         }
     ];
 
-    const benefits = [
-        'Antarmuka yang tenang dan fokus, nyaman digunakan sepanjang hari',
-        'Sistem terintegrasi dari booking hingga invoice dalam satu platform',
-        'Akses multi-peran untuk owner, admin, resepsionis, dan terapis',
-        'Laporan keuangan harian yang akurat dan siap cetak'
-    ];
+
 
     return (
         <div className="landing-page">
@@ -260,7 +295,7 @@ const LandingPage: React.FC = () => {
             </section>
 
             {/* Features Section */}
-            <section className="features-section">
+            <section id="features" className="features-section">
                 <div className="section-header">
                     <h2 className="section-title">Fitur Utama</h2>
                     <p className="section-subtitle">
@@ -278,31 +313,228 @@ const LandingPage: React.FC = () => {
                 </div>
             </section>
 
-            {/* Benefits Section */}
-            <section className="benefits-section">
-                <div className="benefits-content">
-                    <h2 className="section-title">Mengapa SPAPOSPLUS?</h2>
-                    <ul className="benefits-list">
-                        {benefits.map((benefit, index) => (
-                            <li key={index} className="benefit-item">
-                                <span className="benefit-check">✓</span>
-                                {benefit}
-                            </li>
-                        ))}
-                    </ul>
+            {/* Pricing Section */}
+            <section id="pricing" className="py-20 bg-mara-background">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold text-mara-primary mb-4 font-serif">Biaya Langganan</h2>
+                        <p className="text-gray-500 max-w-2xl mx-auto">
+                            Pilih paket yang sesuai dengan kebutuhan bisnis spa Anda. Investasi terbaik untuk pertumbuhan bisnis.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {/* Monthly Package - 199k */}
+                        <div className="bg-white rounded-2xl p-8 border border-mara-secondary/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                            <h3 className="text-xl font-bold text-mara-primary mb-2">Monthly Package</h3>
+                            <div className="text-sm font-semibold text-gray-500 mb-4">(Bulanan)</div>
+                            <div className="text-4xl font-bold text-mara-accent mb-2">Rp 199.000<span className="text-sm text-gray-400 font-normal">/bulan</span></div>
+                            <p className="text-gray-500 mb-6 text-sm">Paket dasar untuk pengelolaan operasional jangka pendek.</p>
+                            <ul className="space-y-4 mb-8">
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 10 Staff</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 3 Cabang</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Sistem POS</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Laporan</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Manajemen Inventori</li>
+                            </ul>
+                            <button onClick={() => handleSubscribe('Monthly Package')} className="w-full py-3 rounded-lg border-2 border-mara-primary text-mara-primary font-bold hover:bg-mara-primary hover:text-white transition-colors">
+                                Pilih Monthly
+                            </button>
+                        </div>
+
+                        {/* 6-Month Package - 999k */}
+                        <div className="bg-white rounded-2xl p-8 border-2 border-mara-accent shadow-xl transform scale-105 relative">
+                            <div className="absolute top-0 right-0 bg-mara-accent text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">MOST POPULAR</div>
+                            <h3 className="text-xl font-bold text-mara-primary mb-2">6-Month Package</h3>
+                            <div className="text-sm font-semibold text-gray-500 mb-4">(Hemat)</div>
+                            <div className="text-4xl font-bold text-mara-accent mb-2">Rp 999.000<span className="text-sm text-gray-400 font-normal">/6 bulan</span></div>
+                            <p className="text-gray-500 mb-6 text-sm">Lebih hemat dari harga bulanan.</p>
+                            <ul className="space-y-4 mb-8">
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 10 Staff</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 3 Cabang</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Sistem POS</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Laporan Lanjutan</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Manajemen Inventori</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Unlimited Staff (dalam limitasi paket)</li>
+                            </ul>
+                            <button onClick={() => handleSubscribe('6-Month Package')} className="w-full py-3 rounded-lg bg-mara-accent text-white font-bold hover:bg-white hover:text-mara-accent border-2 border-mara-accent transition-colors">
+                                Pilih 6-Month
+                            </button>
+                        </div>
+
+                        {/* Yearly Package - 1.899k */}
+                        <div className="bg-white rounded-2xl p-8 border border-mara-secondary/30 shadow-sm hover:shadow-xl transition-all duration-300">
+                            <h3 className="text-xl font-bold text-mara-primary mb-2">Yearly Package</h3>
+                            <div className="text-sm font-semibold text-gray-500 mb-4">(Super Hemat)</div>
+                            <div className="text-4xl font-bold text-mara-accent mb-1">Rp 1.899.000<span className="text-sm text-gray-400 font-normal">/tahun</span></div>
+                            <div className="text-xs text-mara-primary font-semibold mb-6">(~Rp 158rb/bulan)</div>
+                            <ul className="space-y-4 mb-8">
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 20 Staff</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 5 Cabang</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Semua Fitur 6-Month</li>
+                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Priority Support</li>
+                            </ul>
+                            <button onClick={() => handleSubscribe('Yearly Package')} className="w-full py-3 rounded-lg border-2 border-mara-primary text-mara-primary font-bold hover:bg-mara-primary hover:text-white transition-colors">
+                                Pilih Yearly
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div className="benefits-visual">
-                    <div className="benefit-stat">
-                        <span className="stat-number">100%</span>
-                        <span className="stat-label">Terintegrasi</span>
+            </section>
+
+            {/* Coverage Section */}
+            <section className="py-24 bg-white relative overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="text-center mb-16">
+                        <div className="uppercase tracking-widest text-xs font-bold text-gray-400 mb-4">JANGKAUAN KAMI DI INDONESIA</div>
                     </div>
-                    <div className="benefit-stat">
-                        <span className="stat-number">24/7</span>
-                        <span className="stat-label">Akses Cloud</span>
+
+                    <div className="relative">
+                        {/* Map Background */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 transform scale-110">
+                            <img
+                                src={coverageMap}
+                                alt="Indonesia Map"
+                                className="w-full max-w-5xl object-contain"
+                            />
+                        </div>
+
+                        {/* Stats Overlay */}
+                        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 text-center py-12">
+                            <div>
+                                <div className="text-5xl md:text-6xl font-bold text-mara-accent mb-2">2,474</div>
+                                <div className="text-gray-500 font-medium">Owner Bisnis Spa</div>
+                            </div>
+                            <div>
+                                <div className="text-5xl md:text-6xl font-bold text-mara-accent mb-2">4,760,067</div>
+                                <div className="text-gray-500 font-medium">Total Pelanggan</div>
+                            </div>
+                            <div>
+                                <div className="text-5xl md:text-6xl font-bold text-mara-accent mb-2">3,167</div>
+                                <div className="text-gray-500 font-medium">Outlet Aktif</div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="benefit-stat">
-                        <span className="stat-number">∞</span>
-                        <span className="stat-label">Booking</span>
+                </div>
+            </section>
+
+            {/* Latest Blog Section */}
+            <section className="py-20 bg-gray-50">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-end mb-12">
+                        <div>
+                            <h2 className="text-3xl font-bold text-mara-primary mb-2 font-serif">Wawasan Terbaru</h2>
+                            <p className="text-gray-500">Tips dan strategi untuk mengembangkan bisnis spa Anda.</p>
+                        </div>
+                        <Link to="/blog" className="hidden md:inline-flex items-center text-mara-primary font-bold hover:text-mara-accent transition-colors">
+                            Lihat Semua Artikel <span className="ml-2">→</span>
+                        </Link>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {(posts.length > 0 ? posts : [
+                            {
+                                title: "5 Strategi Digital Marketing untuk Spa di 2026",
+                                excerpt: "Pelajari cara memanfaatkan media sosial dan iklan digital untuk mendatangkan lebih banyak pelanggan ke bisnis spa Anda.",
+                                date: "10 Feb 2026",
+                                image: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                                slug: ""
+                            },
+                            {
+                                title: "Pentingnya Retensi Pelanggan dalam Bisnis Wellness",
+                                excerpt: "Mengapa mempertahankan pelanggan lama jauh lebih menguntungkan daripada mencari pelanggan baru? Simak penjelasannya.",
+                                date: "08 Feb 2026",
+                                image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                                slug: ""
+                            },
+                            {
+                                title: "Optimalkan Operasional Spa dengan Sistem Cloud",
+                                excerpt: "Bagaimana teknologi cloud dapat membantu Anda mengelola inventory, booking, dan staff dari mana saja dan kapan saja.",
+                                date: "05 Feb 2026",
+                                image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                                slug: ""
+                            }
+                        ]).map((post, index) => (
+                            <Link key={index} to={post.slug ? `/blog/${post.slug}` : '/blog'} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
+                                <div className="h-48 overflow-hidden relative">
+                                    <div className="absolute inset-0 bg-mara-primary/10 group-hover:bg-transparent transition-colors z-10" />
+                                    <img src={getPostImage(post as BlogPost)} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+                                </div>
+                                <div className="p-6">
+                                    <div className="text-xs font-bold text-mara-accent uppercase tracking-wider mb-2">{getPostDate(post as BlogPost)}</div>
+                                    <h3 className="text-xl font-bold text-mara-primary mb-3 font-serif group-hover:text-mara-accent transition-colors line-clamp-2">{post.title}</h3>
+                                    <p className="text-gray-500 text-sm line-clamp-3 mb-4">{post.excerpt}</p>
+                                    <div className="text-mara-primary font-bold text-sm inline-flex items-center">
+                                        Baca Selengkapnya <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+
+                    <div className="mt-8 text-center md:hidden">
+                        <Link to="/blog" className="inline-flex items-center text-mara-primary font-bold hover:text-mara-accent transition-colors">
+                            Lihat Semua Artikel <span className="ml-2">→</span>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <section className="py-20 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold text-mara-primary mb-4 font-serif">Kata Mereka</h2>
+                        <p className="text-gray-500 max-w-2xl mx-auto">
+                            Apa kata pemilik bisnis spa yang telah mempercayakan operasional mereka pada SPAPOSPLUS.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {[
+                            {
+                                name: "Sarah Wijaya",
+                                role: "Owner",
+                                spa: "Zen Wellness Jakarta",
+                                content: "Sejak menggunakan SPAPOSPLUS, pencatatan transaksi jadi jauh lebih rapi. Fitur laporannya sangat membantu saya menganalisa performa terapis.",
+                                initial: "S"
+                            },
+                            {
+                                name: "Budi Santoso",
+                                role: "Manager",
+                                spa: "Bali Radiance Spa",
+                                content: "Sistem booking onlinenya juara! Pelanggan jadi lebih mudah reservasi, dan no-show rate kami turun drastis berkat fitur reminder WhatsApp otomatis.",
+                                initial: "B"
+                            },
+                            {
+                                name: "Linda Kusuma",
+                                role: "Owner",
+                                spa: "The Beauty Lounge",
+                                content: "Customer supportnya sangat responsif. Aplikasi mudah digunakan bahkan oleh staff baru. Sangat direkomendasikan untuk bisnis spa yang ingin scale up.",
+                                initial: "L"
+                            }
+                        ].map((testimonial, index) => (
+                            <div key={index} className="bg-mara-background p-8 rounded-2xl shadow-sm border border-mara-secondary/20 relative">
+                                <div className="text-mara-accent text-4xl font-serif absolute top-4 right-6 opacity-20">"</div>
+                                <div className="flex items-center gap-1 mb-4">
+                                    {[...Array(5)].map((_, i) => (
+                                        <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                        </svg>
+                                    ))}
+                                </div>
+                                <p className="text-gray-600 mb-6 italic leading-relaxed">"{testimonial.content}"</p>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full bg-mara-primary flex items-center justify-center text-white font-bold text-xl">
+                                        {testimonial.initial}
+                                    </div>
+                                    <div>
+                                        <div className="font-bold text-mara-primary">{testimonial.name}</div>
+                                        <div className="text-sm text-gray-500">{testimonial.role}, {testimonial.spa}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>

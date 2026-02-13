@@ -1,22 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { Link, useLocation } from 'react-router-dom';
 import spaPos07 from '../../assets/spa-pos-07.png';
-import '../../pages/LandingPage.css'; // Reuse existing styles
-
-// Get dashboard URL from environment variable or use default
-const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || 'http://localhost:5173';
+import '../../pages/LandingPage.css';
 
 const Navbar: React.FC = () => {
-    const { isAuthenticated } = useAuth();
+    // const { isAuthenticated } = useAuth(); // Unused
+    const location = useLocation();
+    const isHome = location.pathname === '/';
 
-    const handleGetStarted = () => {
-        // Redirect to dashboard (separate application)
-        if (isAuthenticated) {
-            window.location.href = `${DASHBOARD_URL}/app/dashboard`;
-        } else {
-            // Navigate to login with register mode
-            window.location.href = `${DASHBOARD_URL}/login?mode=register`;
+    const handleCobaGratis = () => {
+        window.location.href = 'https://dashboard.spapos.id/login';
+    };
+
+    const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
+        if (!isHome) return; // If not on home, Link will handle navigation
+        e.preventDefault();
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
@@ -29,9 +30,26 @@ const Navbar: React.FC = () => {
                     </Link>
                 </div>
                 <div className="flex items-center gap-6">
-                    <Link to="/blog" className="text-gray-600 hover:text-gray-900 font-medium">Blog</Link>
-                    <button className="nav-cta" onClick={handleGetStarted}>
-                        {isAuthenticated ? 'Dashboard' : 'Masuk'}
+                    <div className="hidden md:flex items-center gap-6">
+                        {isHome ? (
+                            <a href="#features" onClick={scrollToSection('features')} className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Fitur Utama</a>
+                        ) : (
+                            <Link to="/#features" className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Fitur Utama</Link>
+                        )}
+
+                        <Link to="/blog" className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Blog</Link>
+
+                        {isHome ? (
+                            <a href="#pricing" onClick={scrollToSection('pricing')} className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Biaya</a>
+                        ) : (
+                            <Link to="/#pricing" className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Biaya</Link>
+                        )}
+
+                        <Link to="/contact" className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Kontak</Link>
+                    </div>
+
+                    <button className="nav-cta" onClick={handleCobaGratis}>
+                        Coba Gratis
                     </button>
                 </div>
             </div>

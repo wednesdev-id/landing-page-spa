@@ -1,9 +1,17 @@
 import { S3Client, PutObjectCommand, GetObjectCommand, CreateBucketCommand, HeadBucketCommand } from '@aws-sdk/client-s3';
-// ... imports
-
-// ... config
+import crypto from 'crypto';
 
 const bucketName = process.env.AWS_BUCKET_NAME || 'spapos-assets';
+
+const s3Client = new S3Client({
+    region: process.env.AWS_REGION || 'us-east-1',
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+    },
+    endpoint: process.env.AWS_ENDPOINT,
+    forcePathStyle: true, // Needed for MinIO
+});
 
 class S3Service {
     private isBucketChecked = false;
