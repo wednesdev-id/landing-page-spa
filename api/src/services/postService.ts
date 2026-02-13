@@ -5,6 +5,9 @@ interface PostData {
     content: string;
     slug: string;
     published?: boolean;
+    image?: string | null;
+    tags?: string[];
+    scheduledAt?: string | Date | null;
 }
 
 class PostService {
@@ -27,6 +30,8 @@ class PostService {
         const data = {
             ...postData,
             published: postData.published ?? false,
+            tags: postData.tags || [],
+            scheduledAt: postData.scheduledAt ? new Date(postData.scheduledAt) : null,
         };
         return postRepository.create(data);
     }

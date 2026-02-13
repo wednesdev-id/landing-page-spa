@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import postRoutes from './routes/postRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 const app = express();
 
@@ -28,5 +29,6 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/posts', postRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/upload', uploadRoutes);
 
 export default app;

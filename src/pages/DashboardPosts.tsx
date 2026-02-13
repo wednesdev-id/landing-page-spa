@@ -12,14 +12,14 @@ interface Post {
     slug: string;
     createdAt: string;
     published: boolean;
+    tags?: string[];
+    scheduledAt?: string;
 }
 
 export default function DashboardPosts() {
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
 
-    // Use App static methods if needed or just fallback to standard message if not fully wrapped
-    // But since we wrapped App in App.tsx, we can use App.useApp()
     const { message } = App.useApp();
 
     const fetchPosts = () => {
@@ -76,10 +76,29 @@ export default function DashboardPosts() {
             render: (date: string) => new Date(date).toLocaleDateString(),
         },
         {
+            title: 'Tags',
+            key: 'tags',
+            responsive: ['lg' as const],
+            render: (_: any, record: Post) => (
+                <>
+                    {record.tags?.map((tag) => (
+                        <Tag key={tag} color="blue">{tag}</Tag>
+                    ))}
+                </>
+            ),
+        },
+        {
             title: 'Status',
             key: 'status',
             responsive: ['sm' as const],
-            render: () => <Tag color="green">Published</Tag>,
+            render: (_: any, record: Post) => {
+                const isScheduled = record.scheduledAt && new Date(record.scheduledAt) > new Date();
+                return isScheduled ? (
+                    <Tag color="orange" icon={<i className="fas fa-clock" />}>Scheduled</Tag>
+                ) : (
+                    <Tag color="green">Published</Tag>
+                );
+            },
         },
         {
             title: 'Actions',

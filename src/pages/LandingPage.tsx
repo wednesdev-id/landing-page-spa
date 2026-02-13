@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import SEO from '../components/SEO';
-import spaPos07 from '../assets/spa-pos-07.png';
 import spaPos09 from '../assets/spa-pos-09.png';
+import Navbar from '../components/layout/Navbar';
 import './LandingPage.css';
 
 // Get dashboard URL from environment variable or use default
@@ -93,19 +93,8 @@ const LandingPage: React.FC = () => {
                 description="Kelola bisnis spa Anda dengan mudah menggunakan SPAPOSPLUS. Booking online, manajemen terapis, laporan keuangan, dan POS dalam satu aplikasi."
             />
             {/* Navigation */}
-            <nav className="landing-nav">
-                <div className="landing-nav-content">
-                    <div className="landing-logo">
-                        <img src={spaPos07} alt="SPAPOSPLUS" style={{ height: '40px', width: 'auto' }} />
-                    </div>
-                    <div className="flex items-center gap-6">
-                        <Link to="/blog" className="text-gray-600 hover:text-gray-900 font-medium">Blog</Link>
-                        <button className="nav-cta" onClick={handleGetStarted}>
-                            {isAuthenticated ? 'Dashboard' : 'Masuk'}
-                        </button>
-                    </div>
-                </div>
-            </nav>
+            {/* Navigation */}
+            <Navbar />
 
             {/* Hero Section */}
             <section className="hero-section">
