@@ -11,6 +11,9 @@ usage() {
     echo "  lint        Lint the code"
     echo "  db:push     Push Prisma schema to database"
     echo "  db:studio   Open Prisma Studio"
+    echo "  docker:web  Start Docker (Web Only - Connects to .env services)"
+    echo "  docker:local Start Docker (Full Stack - Local DB & MinIO)"
+    echo "  docker:down Stop all Docker containers"
     echo "  clean       Remove node_modules and dist"
     echo "  help        Show this help message"
     echo ""
@@ -78,6 +81,21 @@ case "$1" in
     db:studio)
         echo "Opening Prisma Studio..."
         pnpm prisma studio
+        ;;
+    docker:web)
+        echo "Starting Docker (Web Only)..."
+        echo "Connecting to services defined in .env..."
+        docker-compose -f infrastructure/docker-compose.yml up --build
+        ;;
+    docker:local)
+        echo "Starting Docker (Full Stack Local)..."
+        echo "Starting local Postgres and MinIO..."
+        docker-compose -f infrastructure/docker-compose.yml -f infrastructure/docker-compose.local.yml up --build
+        ;;
+    docker:down)
+        echo "Stopping Docker containers..."
+        echo "Note: Database and MinIO volumes will be preserved."
+        docker-compose -f infrastructure/docker-compose.yml -f infrastructure/docker-compose.local.yml down
         ;;
     clean)
         echo "Cleaning project..."
