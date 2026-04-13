@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
     const isHome = location.pathname === '/';
 
     const handleCobaGratis = () => {
-        window.location.href = 'https://dashboard.spapos.id/login';
+        window.location.href = 'https://app.spapos.id/login';
     };
 
     const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {

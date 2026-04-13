@@ -4,6 +4,11 @@ import SEO from '../components/SEO';
 import spaPos09 from '../assets/spa-pos-09.png';
 import coverageMap from '../assets/coverage-map.png';
 import Navbar from '../components/layout/Navbar';
+import EnhancedFeatures from '../components/landing/EnhancedFeatures';
+import UserRolesSection from '../components/landing/UserRolesSection';
+import BenefitsAdvantages from '../components/landing/BenefitsAdvantages';
+import Integrations from '../components/landing/Integrations';
+import FAQSection from '../components/landing/FAQSection';
 import './LandingPage.css';
 
 // Interface for Blog Post
@@ -77,7 +82,7 @@ const LandingPage: React.FC = () => {
 
     const handleGetStarted = () => {
         // Redirect to dashboard login
-        window.location.href = 'https://dashboard.spapos.id/login';
+        window.location.href = 'https://app.spapos.id/login';
     };
 
     const handleSubscribe = (plan: string) => {
@@ -120,8 +125,8 @@ const LandingPage: React.FC = () => {
     return (
         <div className="landing-page">
             <SEO
-                title="SPAPOSPLUS - Aplikasi Kasir & Manajemen Spa Terbaik"
-                description="Kelola bisnis spa Anda dengan mudah menggunakan SPAPOSPLUS. Booking online, manajemen terapis, laporan keuangan, dan POS dalam satu aplikasi."
+                title="SPAPOSPLUS - Sistem Manajemen Spa Mudah & Lengkap | Booking, Membership, POS"
+                description="Kelola bisnis spa dengan mudah! Booking online, manajemen terapis, membership, laporan keuangan, dan POS dalam satu aplikasi. Setup 5 menit. Gratis 14 hari."
             />
             {/* Navigation */}
             <Navbar />
@@ -146,7 +151,7 @@ const LandingPage: React.FC = () => {
                     {/* CTA Button */}
                     <div className="hero-cta-group">
                         <button className="hero-cta hero-cta-primary" onClick={handleGetStarted}>
-                            Mulai Gratis 7 Hari
+                            Mulai Gratis 14 Hari
                             <svg className="hero-cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
@@ -307,6 +312,18 @@ const LandingPage: React.FC = () => {
                     ))}
                 </div>
             </section>
+
+            {/* Enhanced Features Showcase Section */}
+            <EnhancedFeatures />
+
+            {/* User Roles & Workflows Section */}
+            <UserRolesSection />
+
+            {/* Benefits & Advantages Section */}
+            <BenefitsAdvantages />
+
+            {/* Integrations Section */}
+            <Integrations />
 
             {/* Pricing Section */}
             <section id="pricing" className="py-20 bg-mara-background">
@@ -522,6 +539,9 @@ const LandingPage: React.FC = () => {
                     </div>
                 </div>
             </section>
+
+            {/* FAQ Section */}
+            <FAQSection />
 
             {/* CTA Section */}
             <section className="cta-section" >
