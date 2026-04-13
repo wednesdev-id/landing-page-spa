@@ -1,0 +1,7 @@
+# Ignore backend files for Vercel deployment
+api/
+prisma/
+*.log
+.env
+.env.local
+.env.*.local
