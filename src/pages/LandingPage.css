@@ -877,3 +877,462 @@
     font-size: 0.875rem;
   }
 }
+
+/* ============================================
+   RESPONSIVE MEDIA QUERIES
+   ============================================ */
+
+/* Mobile Devices (320px - 480px) */
+@media (max-width: 480px) {
+  /* Hero Section - Mobile Stack */
+  .hero-section {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 7rem 1.25rem 3rem;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .hero-cta {
+    width: 100%;
+    min-width: unset;
+    padding: 1rem 1.5rem;
+  }
+
+  /* Hero Visual - Hide or Scale Down on Very Small Screens */
+  .hero-visual {
+    display: none;
+  }
+
+  /* Trust Indicators - Stack on Mobile */
+  .hero-trust {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .trust-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Small Mobile & Large Mobile (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .hero-section {
+    flex-direction: column;
+    gap: 3rem;
+    padding: 7rem 2rem 3rem;
+  }
+
+  .hero-title {
+    font-size: 2.75rem;
+  }
+
+  .hero-visual {
+    flex: 1;
+  }
+
+  /* Dashboard Mockup - Scale Down */
+  .hero-mockup {
+    transform: scale(0.85);
+  }
+
+  /* Trust Indicators */
+  .hero-trust {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .trust-item {
+    flex: 1 1 calc(50% - 1rem);
+    min-width: 140px;
+  }
+}
+
+/* Tablet Portrait (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-section {
+    gap: 3rem;
+    padding: 7rem 2rem 3rem;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-visual {
+    flex: 0.9;
+  }
+
+  /* Dashboard Mockup */
+  .hero-mockup {
+    transform: scale(0.95);
+  }
+}
+
+/* Tablet Landscape & Small Desktop (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .hero-section {
+    gap: 3rem;
+    max-width: 1200px;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-visual {
+    flex: 0.95;
+  }
+
+  .landing-nav-content {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Features Section - Mobile Responsive */
+@media (max-width: 767px) {
+  /* Features Grid */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+
+  /* Section Spacing */
+  .features-section,
+  .enhanced-features-section,
+  .user-roles-section,
+  .benefits-section,
+  .integrations-section,
+  .faq-section {
+    padding: 4rem 1.25rem;
+  }
+
+  /* Section Headers */
+  .section-title,
+  .section-title-ef,
+  .section-title-ba,
+  .section-title-ur,
+  .section-title-int {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle,
+  .section-subtitle-ef,
+  .section-subtitle-ba,
+  .section-subtitle-ur,
+  .section-subtitle-int {
+    font-size: 1rem;
+  }
+}
+
+/* Enhanced Features Section - Mobile */
+@media (max-width: 767px) {
+  .enhanced-features-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .category-nav {
+    position: static;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  .category-nav-list {
+    flex-direction: row;
+    padding: 0.5rem 0;
+  }
+
+  .category-nav-item {
+    min-width: 140px;
+    padding: 0.75rem 1rem;
+  }
+
+  .feature-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* User Roles Section - Mobile */
+@media (max-width: 767px) {
+  .roles-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .workflows-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-card {
+    padding: 1.5rem;
+  }
+
+  .workflow-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .workflow-steps {
+    gap: 1rem;
+  }
+
+  .step-number {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Benefits Section - Mobile */
+@media (max-width: 767px) {
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+  }
+
+  .advantages-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .advantage-card {
+    padding: 1.25rem;
+  }
+
+  .benefits-cta {
+    flex-direction: column;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .benefits-cta-button {
+    width: 100%;
+  }
+}
+
+/* Integrations Section - Mobile */
+@media (max-width: 767px) {
+  .integration-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .integrations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .integration-card {
+    padding: 1rem;
+  }
+
+  .integration-icon {
+    font-size: 1.5rem;
+  }
+
+  .integrations-cta {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+}
+
+/* FAQ Section - Mobile */
+@media (max-width: 767px) {
+  .faq-categories {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .faq-category-button,
+  .faq-category-active {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .faq-question {
+    padding: 1rem;
+  }
+
+  .faq-question-text {
+    font-size: 0.9375rem;
+  }
+
+  .faq-cta {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .faq-cta-button {
+    width: 100%;
+  }
+}
+
+/* Pricing Section - Mobile */
+@media (max-width: 767px) {
+  .py-20 {
+    padding: 3rem 1rem;
+  }
+
+  [class*="grid md:grid-cols-3"] {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .text-3xl {
+    font-size: 1.75rem;
+  }
+}
+
+/* Testimonials Section - Mobile */
+@media (max-width: 767px) {
+  [class*="grid md:grid-cols-3"] {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CTA Section - Mobile */
+@media (max-width: 767px) {
+  .cta-section {
+    padding: 4rem 1.25rem;
+  }
+
+  .cta-title {
+    font-size: 1.75rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Footer - Mobile */
+@media (max-width: 767px) {
+  .landing-footer {
+    padding: 3rem 1.25rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}
+
+/* Touch Target Optimizations for All Interactive Elements */
+@media (max-width: 767px) {
+  /* Buttons */
+  button,
+  .nav-cta,
+  .hero-cta,
+  .cta-button,
+  .benefits-cta-button,
+  .faq-cta-button,
+  .integrations-cta-button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.875rem 1.25rem;
+  }
+
+  /* Links */
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Interactive Cards */
+  .feature-card,
+  .advantage-card,
+  .integration-card,
+  .role-card,
+  .workflow-card,
+  .faq-item {
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(198, 168, 109, 0.2);
+  }
+
+  /* Active States for Touch Feedback */
+  button:active,
+  .hero-cta:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+/* Fix Horizontal Scroll Issues */
+@media (max-width: 767px) {
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-mockup,
+  .hero-visual,
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Prevent Text Overflow on Mobile */
+@media (max-width: 480px) {
+  .hero-title,
+  .section-title,
+  .section-title-ef,
+  .section-title-ba,
+  .section-title-ur,
+  .section-title-int,
+  .feature-title,
+  .advantage-title,
+  .integration-name,
+  .role-card-title,
+  .workflow-title {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+/* Safe Area Support for Notched Phones */
+@supports (padding: env(safe-area-inset-top)) {
+  .landing-nav {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .hero-section {
+    padding-top: calc(7rem + env(safe-area-inset-top));
+  }
+}
