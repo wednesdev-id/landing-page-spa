@@ -4,9 +4,6 @@ import BranchAdminIcon from './icons/BranchAdminIcon';
 import ReceptionistIcon from './icons/ReceptionistIcon';
 import TherapistIcon from './icons/TherapistIcon';
 import SuperAdminIcon from './icons/SuperAdminIcon';
-import BookingFlowIcon from './icons/BookingFlowIcon';
-import TreatmentFlowIcon from './icons/TreatmentFlowIcon';
-import DashboardFlowIcon from './icons/DashboardFlowIcon';
 import './UserRolesSection.css';
 
 interface Role {
@@ -16,20 +13,6 @@ interface Role {
   icon: React.FC<{ className?: string }>;
   permissions: string[];
   color: string;
-}
-
-interface WorkflowStep {
-  step: string;
-  title: string;
-  description: string;
-}
-
-interface Workflow {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.FC<{ className?: string }>;
-  steps: WorkflowStep[];
 }
 
 const UserRolesSection: React.FC = () => {
@@ -102,45 +85,6 @@ const UserRolesSection: React.FC = () => {
     }
   ];
 
-  const workflows: Workflow[] = [
-    {
-      id: 'booking',
-      title: 'Alur Booking Mudah',
-      description: 'Proses booking yang simpel dan cepat',
-      icon: BookingFlowIcon,
-      steps: [
-        { step: '1', title: 'Customer Datang', description: 'Customer walk-in atau booking via WhatsApp' },
-        { step: '2', title: 'Cari Slot Kosong', description: 'Receptionist cek ketersediaan therapist & room' },
-        { step: '3', title: 'Konfirmasi Booking', description: 'Pilih service, therapist, room, dan waktu' },
-        { step: '4', title: 'Notifikasi', description: 'System kirim konfirmasi ke customer' }
-      ]
-    },
-    {
-      id: 'treatment',
-      title: 'Alur Treatment Harian Terapis',
-      description: 'Hari kerja terapis jadi lebih terorganisir',
-      icon: TreatmentFlowIcon,
-      steps: [
-        { step: '1', title: 'Login & Cek Jadwal', description: 'Lihat assignment treatment hari ini' },
-        { step: '2', title: 'Customer Check-In', description: 'Customer datang, mulai treatment' },
-        { step: '3', title: 'Update Status', description: 'Update status: mulai → selesai' },
-        { step: '4', title: 'Log & Rating', description: 'Log produk & customer kasih rating' }
-      ]
-    },
-    {
-      id: 'dashboard',
-      title: 'Alur Owner Pantau Bisnis',
-      description: 'Pantau performa bisnis dari mana saja',
-      icon: DashboardFlowIcon,
-      steps: [
-        { step: '1', title: 'Buka Dashboard', description: 'Login dari laptop atau HP' },
-        { step: '2', title: 'Lihat Performa', description: 'Analisa revenue, booking, staff performance' },
-        { step: '3', title: 'Baca Laporan', description: 'Export laporan untuk keputusan bisnis' },
-        { step: '4', title: 'Action', description: 'Buat keputusan berdasarkan data' }
-      ]
-    }
-  ];
-
   return (
     <section className="user-roles-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -182,51 +126,6 @@ const UserRolesSection: React.FC = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Workflows Section */}
-        <div className="workflows-section">
-          <div className="workflows-header">
-            <h3>Workflow yang Simpel & Jelas</h3>
-            <p>Setiap peran punya alur kerja yang mudah diikuti</p>
-          </div>
-
-          <div className="workflows-grid">
-            {workflows.map((workflow) => {
-              const IconComponent = workflow.icon;
-              return (
-                <div key={workflow.id} className="workflow-card">
-                  <div className="workflow-header">
-                    <div className="workflow-icon">
-                      <IconComponent />
-                    </div>
-                    <div className="workflow-header-content">
-                      <h4 className="workflow-title">{workflow.title}</h4>
-                      <p className="workflow-description">{workflow.description}</p>
-                    </div>
-                  </div>
-                  <div className="workflow-steps">
-                    {workflow.steps.map((step, idx) => (
-                      <div key={idx} className="workflow-step">
-                        <div className="step-number">{step.step}</div>
-                        <div className="step-content">
-                          <h5 className="step-title">{step.title}</h5>
-                          <p className="step-description">{step.description}</p>
-                        </div>
-                        {idx < workflow.steps.length - 1 && (
-                          <div className="step-arrow">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M12 5v14M19 12l-7 7-7-7" />
-                            </svg>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </div>
     </section>

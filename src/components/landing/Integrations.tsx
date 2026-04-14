@@ -54,7 +54,7 @@ const Integrations: React.FC = () => {
             Integrasi Lengkap dengan Ekosistem Anda
           </h2>
           <p className="section-subtitle-int">
-            SPAPOSPLUS terhubung dengan berbagai payment gateway, biometric devices, dan layanan lainnya
+            SPAPOSPLUS terhubung dengan berbagai layanan untuk memudahkan operasional bisnis Anda
           </p>
         </div>
 

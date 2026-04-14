@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import BusinessIcon from './icons/BusinessIcon';
 import OperationsIcon from './icons/OperationsIcon';
-import CustomerIcon from './icons/CustomerIcon';
 import FinanceIcon from './icons/FinanceIcon';
-import StaffIcon from './icons/StaffIcon';
-import AutomationIcon from './icons/AutomationIcon';
 import './EnhancedFeatures.css';
 
 interface Feature {
@@ -20,12 +17,12 @@ interface Category {
 }
 
 const EnhancedFeatures: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('business');
+  const [activeCategory, setActiveCategory] = useState('multicabang');
 
   const categories: Category[] = [
     {
-      id: 'business',
-      title: 'Kelola Bisnis',
+      id: 'multicabang',
+      title: 'Kelola Semua Cabang',
       icon: BusinessIcon,
       features: [
         {
@@ -37,167 +34,46 @@ const EnhancedFeatures: React.FC = () => {
           description: 'Owner, manager, receptionist, terapis - masing-masing punya akses yang sesuai pekerjaannya. Aman dan teratur.'
         },
         {
-          title: 'Lihat Performa Semua Cabang dalam 1 View',
+          title: 'Lihat Performa Semua Cabang',
           description: 'Bandingkan performa antar cabang secara real-time. Tahu cabang mana yang paling produktif.'
-        },
-        {
-          title: 'Manajemen Organization & Branch',
-          description: 'Tambah, edit, atau hapus cabang dengan mudah. Setup cabang baru dalam hitungan menit.'
-        },
-        {
-          title: 'Cross-Branch Analytics',
-          description: 'Laporan gabungan dari semua cabang untuk analisis bisnis yang lebih komprehensif.'
         }
       ]
     },
     {
-      id: 'operations',
-      title: 'Operasional Harian',
+      id: 'operasional',
+      title: 'Operasional Mudah',
       icon: OperationsIcon,
       features: [
         {
-          title: 'Booking Mudah, Minim No-Show',
-          description: 'Booking system dengan notifikasi otomatis. Kurangi no-show hingga 60% dengan reminder WhatsApp.'
+          title: 'Booking Mudah & Cepat',
+          description: 'Booking system dengan notifikasi otomatis. Kurangi no-show dengan reminder otomatis.'
         },
         {
-          title: 'Pantau Ketersediaan Room Real-Time',
-          description: 'Lihat status room (available, occupied, cleaning) secara langsung. Optimalkan penggunaan room.'
+          title: 'POS Kasir',
+          description: 'Proses pembayaran cash, transfer, atau e-wallet dengan mudah dan cepat.'
         },
         {
-          title: 'Jadwal Shift yang Fleksibel',
-          description: 'Atur jadwal shift staff dengan mudah. Drag-and-drop schedule, auto-cleanup, dan conflict detection.'
-        },
-        {
-          title: 'Absensi Staff yang Teratur',
-          description: 'Sistem absensi dengan check-in/check-out. Pantau kehadiran staff dan tracking jam kerja dengan mudah.'
-        },
-        {
-          title: 'Kasir Cepat & Pembayaran Mudah',
-          description: 'POS system untuk treatment dan produk. Proses pembayaran cash, transfer, atau e-wallet dengan mudah.'
-        },
-        {
-          title: 'Manajemen Room & Cleaning Tasks',
-          description: 'Track room status dan assign cleaning tasks. Pastikan room selalu siap untuk next customer.'
+          title: 'Jadwal Shift & Absensi',
+          description: 'Atur jadwal shift staff dengan mudah. Pantau kehadiran dan tracking jam kerja.'
         }
       ]
     },
     {
-      id: 'customer',
-      title: 'Pelanggan Setia',
-      icon: CustomerIcon,
-      features: [
-        {
-          title: 'Kenali Pelanggan Anda Lebih Dekat',
-          description: 'Database pelanggan lengkap dengan preferensi, history treatment, dan feedback.'
-        },
-        {
-          title: 'Program Membership Silver, Gold, Platinum',
-          description: 'Loyalty program dengan tier-based benefits. Buat pelanggan merasa spesial dan betah.'
-        },
-        {
-          title: 'Buat Pelanggan Betah di Spa Anda',
-          description: 'Member benefits, free products, milestone rewards. Tingkatkan customer retention rate.'
-        },
-        {
-          title: 'Pahami Perilaku Pelanggan',
-          description: 'Analytics tentang visit frequency, spending patterns, dan treatment preferences.'
-        },
-        {
-          title: 'Customer History & Notes',
-          description: 'Catat preferensi dan feedback setiap pelanggan. Personalized service = happy customer.'
-        }
-      ]
-    },
-    {
-      id: 'finance',
-      title: 'Keuangan Teratur',
+      id: 'bisnis',
+      title: 'Laporan & Analitik',
       icon: FinanceIcon,
       features: [
         {
-          title: 'Invoice Otomatis, Rapi & Profesional',
-          description: 'Generate invoice otomatis setiap treatment selesai. Customize template dengan logo spa Anda.'
+          title: 'Laporan Lengkap 1 Klik',
+          description: 'Laporan harian, mingguan, bulanan. Sales report, staff performance, inventory.'
         },
         {
-          title: 'Terima Pembayaran Cash, Card, E-Wallet',
-          description: 'Multi payment gateway support (Mayar, Midtrans, Xendit). Pembayaran jadi lebih fleksibel.'
-        },
-        {
-          title: 'Laporan Lengkap, 1 Klik',
-          description: 'Laporan harian, mingguan, bulanan. Sales report, staff performance, inventory consumption.'
-        },
-        {
-          title: 'Pantau Pendapatan Harian Real-Time',
+          title: 'Pantau Pendapatan Real-Time',
           description: 'Dashboard revenue dengan breakdown per service, product, therapist, dan cabang.'
         },
         {
-          title: 'Track Payment Status & Overdue',
-          description: 'Monitor invoice status (pending, paid, overdue). Follow-up payments yang lebih efektif.'
-        },
-        {
-          title: 'Tax Management & Reports',
-          description: 'Hitung pajak per service. Generate tax reports untuk keperluan akuntansi.'
-        }
-      ]
-    },
-    {
-      id: 'staff',
-      title: 'Tim Terapis Lebih Produktif',
-      icon: StaffIcon,
-      features: [
-        {
-          title: 'Database Terapis Lengkap',
-          description: 'Profil staff dengan specialization, certification, contract dates, dan performance history.'
-        },
-        {
-          title: 'Atur Jadwal Tanpa Ribet',
-          description: 'Schedule system dengan recurring patterns, templates, dan auto-cleanup. Save time, reduce errors.'
-        },
-        {
-          title: 'Absensi yang Akurat',
-          description: 'Sistem absensi dengan check-in/check-out. Data kehadiran tercatat dengan rapi dan siap untuk payroll.'
-        },
-        {
-          title: 'Review Performa Terapis',
-          description: 'Performance metrics: order hours, customer count, efficiency, ratings. Identify top performers.'
-        },
-        {
-          title: 'Log Produk yang Digunakan',
-          description: 'Track product usage per treatment untuk inventory control dan cost calculation.'
-        },
-        {
-          title: 'Training & Development Tracking',
-          description: 'Monitor staff training progress dan skill development. Build a stronger team.'
-        }
-      ]
-    },
-    {
-      id: 'automation',
-      title: 'Otomatisasi Cerdas',
-      icon: AutomationIcon,
-      features: [
-        {
-          title: 'Notifikasi Booking, Payment, Dll Otomatis',
-          description: 'Automated notifications untuk booking reminders, payment confirmations, dan alerts.'
-        },
-        {
-          title: 'Sistem Stabil, Support 24/7',
-          description: '99.5% uptime dengan 24/7 monitoring. System yang reliable untuk bisnis Anda.'
-        },
-        {
-          title: 'Data Aman, Backup Otomatis Setiap Hari',
-          description: 'Automated daily backups dengan data encryption 256-bit. Data Anda aman dan selalu recoverable.'
-        },
-        {
-          title: 'Google OAuth & Multiple Login Options',
-          description: 'Multiple login options: password atau Google OAuth. Secure dan convenient untuk staff.'
-        },
-        {
-          title: 'Automated Cleanup Jobs',
-          description: 'Auto-delete old schedules, cleanup error logs, maintenance tasks. System tetap optimal tanpa manual effort.'
-        },
-        {
-          title: 'API untuk Custom Integrations',
-          description: 'RESTful API untuk integrasi dengan accounting software, SMS gateway, atau custom systems.'
+          title: 'Invoice Otomatis & Pajak',
+          description: 'Generate invoice otomatis dan hitung pajak per service. Rapi dan profesional.'
         }
       ]
     }
@@ -224,6 +100,12 @@ const EnhancedFeatures: React.FC = () => {
           <div className="category-nav">
             <div className="category-nav-header">
               <h3>Pilih Kategori</h3>
+              <span className="category-nav-hint">
+                Swipe
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </span>
             </div>
             <nav className="category-nav-list">
               {categories.map((category) => {

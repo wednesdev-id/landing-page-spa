@@ -13,50 +13,42 @@ const BenefitsAdvantages: React.FC = () => {
     {
       title: 'All-in-One Solution',
       description: 'Single platform untuk semua operasional spa. Tidak perlu multiple software, semua integrated dalam satu sistem.',
-      icon: '🎯',
-      stat: '15+ Modul'
+      icon: '🎯'
     },
     {
       title: 'Multi-Location Ready',
       description: 'Kelola unlimited branches dari satu dashboard. Buka cabang baru tanpa perlu sistem baru.',
-      icon: '🏢',
-      stat: 'Unlimited Cabang'
+      icon: '🏢'
     },
     {
       title: 'Proven Track Record',
-      description: 'Dipercaya oleh 2,474+ spa owners dan 3,167+ active outlets di seluruh Indonesia.',
-      icon: '⭐',
-      stat: '2,474+ Users'
+      description: 'Dipercaya oleh 2,000+ spa owners di seluruh Indonesia.',
+      icon: '⭐'
     },
     {
       title: 'Advanced Features',
-      description: 'Enterprise-grade features: biometric attendance, membership system, automated notifications, dan banyak lagi.',
-      icon: '🚀',
-      stat: '85% Complete'
+      description: 'Enterprise-grade features: membership system, automated notifications, dan banyak lagi.',
+      icon: '🚀'
     },
     {
       title: 'Flexible Pricing',
       description: 'Paket untuk bisnis dari segala ukuran. Mulai dari spa kecil sampai franchise besar.',
-      icon: '💰',
-      stat: 'Mulai 199k'
+      icon: '💰'
     },
     {
-      title: '14-Day Free Trial',
-      description: 'Coba semua fitur premium selama 14 hari. No credit card required. Cancel anytime.',
-      icon: '🎁',
-      stat: 'Gratis 14 Hari'
+      title: 'Coba Dulu, Gratis',
+      description: 'Coba semua fitur premium tanpa risiko. No credit card required.',
+      icon: '🎁'
     },
     {
-      title: 'Local Support 24/7',
+      title: 'Local Support',
       description: 'Tim support berbahasa Indonesia siap membantu kapanpun Anda butuh bantuan.',
-      icon: '💬',
-      stat: '24/7 Support'
+      icon: '💬'
     },
     {
       title: 'Continuous Updates',
       description: 'Regular feature additions dan improvements. System yang terus evolve dengan kebutuhan Anda.',
-      icon: '📈',
-      stat: 'Always Updated'
+      icon: '📈'
     }
   ];
 
@@ -93,13 +85,13 @@ const BenefitsAdvantages: React.FC = () => {
         <div className="benefits-cta">
           <div className="benefits-cta-content">
             <h3>Siap Transformasi Bisnis Spa Anda?</h3>
-            <p>Join 2,474+ spa owners yang sudah menggunakan SPAPOSPLUS</p>
+            <p>Join 2,000+ spa owners yang sudah menggunakan SPAPOSPLUS</p>
           </div>
           <button
             className="benefits-cta-button"
             onClick={() => window.location.href = 'https://app.spapos.id/login'}
           >
-            Mulai Gratis 14 Hari
+            Coba Gratis
           </button>
         </div>
       </div>
