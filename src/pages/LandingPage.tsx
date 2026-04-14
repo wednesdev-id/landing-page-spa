@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import SEO from '../components/SEO';
 import spaPos09 from '../assets/spa-pos-09.png';
-import coverageMap from '../assets/coverage-map.png';
 import Navbar from '../components/layout/Navbar';
 import EnhancedFeatures from '../components/landing/EnhancedFeatures';
 import UserRolesSection from '../components/landing/UserRolesSection';
@@ -10,18 +8,6 @@ import BenefitsAdvantages from '../components/landing/BenefitsAdvantages';
 import Integrations from '../components/landing/Integrations';
 import FAQSection from '../components/landing/FAQSection';
 import './LandingPage.css';
-
-// Interface for Blog Post
-interface BlogPost {
-    id: string;
-    title: string;
-    excerpt: string;
-    coverImage?: string;
-    image?: string;
-    date?: string;
-    createdAt?: string;
-    slug: string;
-}
 
 // Icons as simple SVG components for clean look
 const CalendarIcon = () => (
@@ -58,57 +44,6 @@ const ClipboardIcon = () => (
 );
 
 const LandingPage: React.FC = () => {
-    const [posts, setPosts] = useState<BlogPost[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    // Fallback blog posts for production/when API is unavailable
-    const fallbackPosts: BlogPost[] = [
-        {
-            id: '1',
-            title: '5 Tips Meningkatkan Pendapatan Spa Anda',
-            excerpt: 'Pelajari strategi efektif untuk meningkatkan revenue dan optimalkan operasional spa Anda.',
-            slug: '5-tips-meningkatkan-pendapatan-spa',
-            date: new Date().toISOString()
-        },
-        {
-            id: '2',
-            title: 'Pentingnya Manajemen Staff untuk Spa',
-            excerpt: 'Bagaimana mengelola jadwal, performa, dan kehadiran staff spa secara efektif.',
-            slug: 'pentingnya-manajemen-staff-spa',
-            date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
-        },
-        {
-            id: '3',
-            title: 'Membership System: Tingkatkan Customer Loyalty',
-            excerpt: 'Bangun program membership yang efektif untuk meningkatkan retensi pelanggan.',
-            slug: 'membership-system-customer-loyalty',
-            date: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString()
-        }
-    ];
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                // Try to fetch from API first
-                const response = await fetch('/api/posts');
-                if (response.ok) {
-                    const data = await response.json();
-                    setPosts(data.slice(0, 3));
-                } else {
-                    // API not available, use fallback
-                    setPosts(fallbackPosts);
-                }
-            } catch (error) {
-                console.log('API unavailable, using fallback blog posts');
-                setPosts(fallbackPosts);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchPosts();
-    }, []);
-
     const handleGetStarted = () => {
         // Redirect to dashboard login
         window.location.href = 'https://app.spapos.id/login';
@@ -117,15 +52,6 @@ const LandingPage: React.FC = () => {
     const handleSubscribe = (plan: string) => {
         const message = `Halo, saya tertarik dengan paket ${plan} SPAPOSPLUS. Mohon info lebih lanjut.`;
         window.open(`https://wa.me/6281339691260?text=${encodeURIComponent(message)}`, '_blank');
-    };
-
-    // Helper to get image source
-    const getPostImage = (post: BlogPost) => post.coverImage || post.image || 'https://placehold.co/600x400?text=No+Image';
-
-    // Helper to get date
-    const getPostDate = (post: BlogPost) => {
-        const dateStr = post.date || post.createdAt || new Date().toISOString();
-        return new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
     };
 
     const features = [
@@ -507,7 +433,6 @@ const LandingPage: React.FC = () => {
                         <div>
                             <span className="logo-text">SPAPOSPLUS</span>
                             <p className="footer-tagline">Spa POS & Management System</p>
-                            <Link to="/blog" className="text-sm text-gray-400 hover:text-white mt-1 block">Read our Blog</Link>
                         </div>
                     </div>
                     <div className="footer-links">
