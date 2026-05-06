@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import favicon from '/favicon.png';
 import spaPos09 from '../assets/spa-pos-09.png';
 import Navbar from '../components/layout/Navbar';
-import EnhancedFeatures from '../components/landing/EnhancedFeatures';
-import UserRolesSection from '../components/landing/UserRolesSection';
-import BenefitsAdvantages from '../components/landing/BenefitsAdvantages';
-import Integrations from '../components/landing/Integrations';
+import WhyChooseUs from '../components/landing/WhyChooseUs';
+import VideoDemo from '../components/landing/VideoDemo';
+import Testimonials from '../components/landing/Testimonials';
 import FAQSection from '../components/landing/FAQSection';
 import './LandingPage.css';
 
@@ -87,7 +88,7 @@ const LandingPage: React.FC = () => {
             <Navbar />
 
             {/* Hero Section */}
-            <section className="hero-section">
+            <section className="hero-section" id="hero">
                 <div className="hero-content">
                     {/* Hero Badge - Updated for credibility */}
                     <div className="hero-badge">
@@ -268,17 +269,107 @@ const LandingPage: React.FC = () => {
                 </div>
             </section>
 
-            {/* Enhanced Features Showcase Section */}
-            <EnhancedFeatures />
+            {/* Video Demo Section */}
+            <VideoDemo />
 
-            {/* User Roles & Workflows Section */}
-            <UserRolesSection />
+            {/* Why Choose Us Section */}
+            <WhyChooseUs />
 
-            {/* Benefits & Advantages Section */}
-            <BenefitsAdvantages />
+            {/* Services Section */}
+            <section id="services" className="services-section">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="section-header-services">
+                        <h2 className="section-title-services">
+                            Layanan Kami
+                        </h2>
+                        <p className="section-subtitle-services">
+                            Solusi lengkap untuk semua kebutuhan operasional spa Anda
+                        </p>
+                    </div>
 
-            {/* Integrations Section */}
-            <Integrations />
+                    <div className="services-grid">
+                        <div className="service-card">
+                            <div className="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                    <line x1="16" y1="2" x2="16" y2="6" />
+                                    <line x1="8" y1="2" x2="8" y2="6" />
+                                    <line x1="3" y1="10" x2="21" y2="10" />
+                                </svg>
+                            </div>
+                            <h3 className="service-title">Manajemen Booking</h3>
+                            <p className="service-description">
+                                Otomatisasi reservasi spa, kurangi no-show hingga 60%. Kalender booking intuitif dengan notifikasi WhatsApp otomatis.
+                            </p>
+                            <ul className="service-features">
+                                <li>✓ Kalender booking real-time</li>
+                                <li>✓ Notifikasi WhatsApp otomatis</li>
+                                <li>✓ Manajemen room & terapis</li>
+                            </ul>
+                        </div>
+
+                        <div className="service-card">
+                            <div className="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
+                            </div>
+                            <h3 className="service-title">Manajemen Staff & Terapis</h3>
+                            <p className="service-description">
+                                Atur jadwal, pantau performa, dan tracking kehadiran dalam satu aplikasi terintegrasi.
+                            </p>
+                            <ul className="service-features">
+                                <li>✓ Jadwal shift otomatis</li>
+                                <li>✓ Tracking performa terapis</li>
+                                <li>✓ Absensi biometric</li>
+                            </ul>
+                        </div>
+
+                        <div className="service-card">
+                            <div className="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                    <line x1="18" y1="20" x2="18" y2="10" />
+                                    <line x1="12" y1="20" x2="12" y2="4" />
+                                    <line x1="6" y1="20" x2="6" y2="14" />
+                                </svg>
+                            </div>
+                            <h3 className="service-title">Laporan & Analitik Bisnis</h3>
+                            <p className="service-description">
+                                Data-driven decisions untuk growth spa Anda. Insight mendalam dari semua operasional.
+                            </p>
+                            <ul className="service-features">
+                                <li>✓ Laporan revenue harian</li>
+                                <li>✓ Analisis treatment terpopuler</li>
+                                <li>✓ Multi-cabang comparison</li>
+                            </ul>
+                        </div>
+
+                        <div className="service-card">
+                            <div className="service-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                                    <line x1="1" y1="10" x2="23" y2="10" />
+                                </svg>
+                            </div>
+                            <h3 className="service-title">Sistem Kasir (POS)</h3>
+                            <p className="service-description">
+                                Proses pembayaran cepat, rapi, dan profesional. Support berbagai metode pembayaran.
+                            </p>
+                            <ul className="service-features">
+                                <li>✓ Payment multiple channels</li>
+                                <li>✓ Invoice otomatis</li>
+                                <li>✓ Stock management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonials Section */}
+            <Testimonials />
 
             {/* Pricing Section */}
             <section id="pricing" className="py-20 bg-mara-background">
@@ -428,15 +519,24 @@ const LandingPage: React.FC = () => {
             {/* Footer */}
             <footer className="landing-footer" >
                 <div className="footer-content">
-                    <div className="footer-brand" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <img src={spaPos09} alt="Logo" style={{ height: '48px', width: 'auto' }} />
-                        <div>
-                            <span className="logo-text">SPAPOSPLUS</span>
+                    <div className="footer-brand">
+                        <img src={favicon} alt="SPAPOS" className="footer-logo" />
+                        <div className="footer-brand-text">
+                            <span className="logo-text">SPAPOS</span>
                             <p className="footer-tagline">Spa POS & Management System</p>
                         </div>
                     </div>
                     <div className="footer-links">
-                        <span>© 2026 SPAPOSPLUS. All rights reserved.</span>
+                        <a href="#hero" className="footer-link">Beranda</a>
+                        <span className="text-gray-600">•</span>
+                        <a href="#services" className="footer-link">Layanan</a>
+                        <span className="text-gray-600">•</span>
+                        <a href="#pricing" className="footer-link">Biaya</a>
+                        <span className="text-gray-600">•</span>
+                        <Link to="/contact" className="footer-link">Kontak</Link>
+                        <span className="text-gray-600">•</span>
+                        <Link to="/blog" className="footer-link">Blog</Link>
+                        <span className="mt-2 block">© 2026 SPAPOSPLUS. All rights reserved.</span>
                     </div>
                 </div>
             </footer>

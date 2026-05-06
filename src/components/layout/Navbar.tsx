@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import spaPos07 from '../../assets/spa-pos-07.png';
+import favicon from '/favicon.png';
 import '../../pages/LandingPage.css';
 
 const Navbar: React.FC = () => {
@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
 
     // Determine active menu item
     const getActiveState = (path: string) => {
-        if (path === 'home') return isHome;
+        if (path === 'home') return isHome && window.location.hash === '';
         if (path === '/blog') return location.pathname === '/blog';
         if (path === '/contact') return location.pathname === '/contact';
         return false;
@@ -63,8 +63,9 @@ const Navbar: React.FC = () => {
         <nav className="landing-nav">
             <div className="landing-nav-content">
                 <div className="landing-logo">
-                    <Link to="/">
-                        <img src={spaPos07} alt="SPAPOSPLUS" style={{ height: '40px', width: 'auto' }} />
+                    <Link to="/" className="logo-container">
+                        <img src={favicon} alt="SPAPOS" className="logo-image" />
+                        <span className="logo-text">SPAPOS</span>
                     </Link>
                 </div>
 
@@ -72,12 +73,16 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center gap-6">
                     <div className="hidden md:flex items-center gap-6">
                         {isHome ? (
-                            <a href="#features" onClick={scrollToSection('features')} className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Fitur Utama</a>
+                            <a href="#hero" onClick={scrollToSection('hero')} className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Beranda</a>
                         ) : (
-                            <Link to="/#features" className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Fitur Utama</Link>
+                            <Link to="/#hero" className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Beranda</Link>
                         )}
 
-                        <Link to="/blog" className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Blog</Link>
+                        {isHome ? (
+                            <a href="#services" onClick={scrollToSection('services')} className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Layanan</a>
+                        ) : (
+                            <Link to="/#services" className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Layanan</Link>
+                        )}
 
                         {isHome ? (
                             <a href="#pricing" onClick={scrollToSection('pricing')} className="text-gray-600 hover:text-mara-primary font-medium transition-colors">Biaya</a>
@@ -138,23 +143,26 @@ const Navbar: React.FC = () => {
 
                         <nav className="mobile-menu-nav">
                             <a
-                                href="#features"
+                                href="#hero"
                                 onClick={(e) => {
-                                    if (isHome) scrollToSection('features')(e);
+                                    if (isHome) scrollToSection('hero')(e);
                                     setIsMobileMenuOpen(false);
                                 }}
                                 className={`mobile-menu-link ${getActiveState('home') ? 'active' : ''}`}
                             >
-                                Fitur Utama
+                                Beranda
                             </a>
 
-                            <Link
-                                to="/blog"
-                                className={`mobile-menu-link ${getActiveState('/blog') ? 'active' : ''}`}
-                                onClick={() => setIsMobileMenuOpen(false)}
+                            <a
+                                href="#services"
+                                onClick={(e) => {
+                                    if (isHome) scrollToSection('services')(e);
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="mobile-menu-link"
                             >
-                                Blog
-                            </Link>
+                                Layanan
+                            </a>
 
                             <a
                                 href="#pricing"

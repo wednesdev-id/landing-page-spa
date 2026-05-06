@@ -1,0 +1,154 @@
+/* Why Choose Us Section */
+.why-choose-us-section {
+  padding: 6rem 0;
+  background: white;
+}
+
+.section-header-wcu {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title-wcu {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0F3D3E;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.section-subtitle-wcu {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.125rem;
+  color: #6b7280;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.reason-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #E8DCCB;
+}
+
+.reason-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(15, 61, 62, 0.1);
+  border-color: #C6A86D;
+}
+
+.reason-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  background: rgba(198, 168, 109, 0.1);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0F3D3E;
+}
+
+.reason-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.reason-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0F3D3E;
+  margin-bottom: 0.75rem;
+}
+
+.reason-description {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  background: #F8F6F2;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #C6A86D;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .section-title-wcu {
+    font-size: 2rem;
+  }
+
+  .reasons-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .why-choose-us-section {
+    padding: 4rem 0;
+  }
+
+  .section-title-wcu {
+    font-size: 1.75rem;
+  }
+
+  .section-subtitle-wcu {
+    font-size: 1rem;
+  }
+
+  .reasons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-bar {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+}
