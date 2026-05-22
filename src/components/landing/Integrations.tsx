@@ -54,7 +54,7 @@ const Integrations: React.FC = () => {
             Integrasi Lengkap dengan Ekosistem Anda
           </h2>
           <p className="section-subtitle-int">
-            SPAPOSPLUS terhubung dengan berbagai layanan untuk memudahkan operasional bisnis Anda
+            SPAPOS terhubung dengan berbagai layanan untuk memudahkan operasional bisnis Anda
           </p>
         </div>
 
@@ -104,7 +104,7 @@ const Integrations: React.FC = () => {
           <p>Butuh integrasi khusus dengan sistem Anda?</p>
           <button
             className="integrations-cta-button"
-            onClick={() => window.open(`https://wa.me/6281339691260?text=${encodeURIComponent('Halo, saya ingin bertanya tentang integrasi khusus dengan SPAPOSPLUS.')}`, '_blank')}
+            onClick={() => window.open(`https://wa.me/6281339691260?text=${encodeURIComponent('Halo, saya ingin bertanya tentang integrasi khusus dengan SPAPOS.')}`, '_blank')}
           >
             Hubungi Kami
           </button>

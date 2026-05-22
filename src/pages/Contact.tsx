@@ -20,8 +20,8 @@ const Contact: React.FC = () => {
     return (
         <Layout className="min-h-screen bg-mara-background font-sans">
             <SEO
-                title="Hubungi Kami - SPAPOSPLUS"
-                description="Hubungi tim SPAPOSPLUS untuk pertanyaan seputar sistem manajemen spa dan demo produk."
+                title="Hubungi Kami - SPAPOS"
+                description="Hubungi tim SPAPOS untuk pertanyaan seputar sistem manajemen spa dan demo produk."
             />
 
             <Navbar />
@@ -31,7 +31,7 @@ const Contact: React.FC = () => {
                     <div className="text-center mb-16">
                         <Title level={1} className="!mb-4 !text-mara-primary font-serif !text-4xl md:!text-5xl">Hubungi Kami</Title>
                         <Paragraph className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
-                            Punya pertanyaan tentang SPAPOSPLUS? Tim kami siap membantu Anda mengembangkan bisnis spa impian.
+                            Punya pertanyaan tentang SPAPOS? Tim kami siap membantu Anda mengembangkan bisnis spa impian.
                         </Paragraph>
                     </div>
 
@@ -51,7 +51,7 @@ const Contact: React.FC = () => {
                                             </div>
                                             <div>
                                                 <div className="font-bold text-mara-secondary mb-1">WhatsApp</div>
-                                                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="text-white hover:text-mara-accent transition-colors block text-lg font-medium">+62 812-3456-7890</a>
+                                                <a href="https://wa.me/6281339691260" target="_blank" rel="noopener noreferrer" className="text-white hover:text-mara-accent transition-colors block text-lg font-medium">+62 813-3969-1260</a>
                                             </div>
                                         </div>
 
@@ -61,7 +61,7 @@ const Contact: React.FC = () => {
                                             </div>
                                             <div>
                                                 <div className="font-bold text-mara-secondary mb-1">Email</div>
-                                                <a href="mailto:hello@spaposplus.id" className="text-white hover:text-mara-accent transition-colors block text-lg font-medium">hello@spaposplus.id</a>
+                                                <a href="mailto:fara@spapos.id" className="text-white hover:text-mara-accent transition-colors block text-lg font-medium">fara@spapos.id</a>
                                             </div>
                                         </div>
 
@@ -71,7 +71,7 @@ const Contact: React.FC = () => {
                                             </div>
                                             <div>
                                                 <div className="font-bold text-mara-secondary mb-1">Instagram</div>
-                                                <a href="https://instagram.com/spaposplus" target="_blank" rel="noopener noreferrer" className="text-white hover:text-mara-accent transition-colors block text-lg font-medium">@spaposplus</a>
+                                                <a href="https://instagram.com/spapos.id" target="_blank" rel="noopener noreferrer" className="text-white hover:text-mara-accent transition-colors block text-lg font-medium">@spapos.id</a>
                                             </div>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@ const Contact: React.FC = () => {
             </Content>
 
             <Footer className="text-center bg-white border-t border-mara-secondary/30 py-12 mt-auto">
-                <Text className="text-gray-500">© 2026 SPAPOSPLUS. All rights reserved.</Text>
+                <Text className="text-gray-500">© 2026 SPAPOS. All rights reserved.</Text>
             </Footer>
         </Layout>
     );

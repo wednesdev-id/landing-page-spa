@@ -1,6 +1,6 @@
-# SPAPOSPLUS Landing Page
+# SPAPOS Landing Page
 
-This is the standalone landing page for SPAPOSPLUS - A Spa POS & Management System.
+This is the standalone landing page for SPAPOS - A Spa POS & Management System.
 
 ## Setup
 

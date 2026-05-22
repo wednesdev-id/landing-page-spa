@@ -2,86 +2,122 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import favicon from '/favicon.png';
-import spaPos09 from '../assets/spa-pos-09.png';
+import dashboardImg from '/image.png';
 import Navbar from '../components/layout/Navbar';
-import WhyChooseUs from '../components/landing/WhyChooseUs';
 import VideoDemo from '../components/landing/VideoDemo';
 import Testimonials from '../components/landing/Testimonials';
-import FAQSection from '../components/landing/FAQSection';
 import './LandingPage.css';
-
-// Icons as simple SVG components for clean look
-const CalendarIcon = () => (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-        <line x1="16" y1="2" x2="16" y2="6" />
-        <line x1="8" y1="2" x2="8" y2="6" />
-        <line x1="3" y1="10" x2="21" y2="10" />
-    </svg>
-);
-
-const UsersIcon = () => (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-);
-
-const ChartIcon = () => (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <line x1="18" y1="20" x2="18" y2="10" />
-        <line x1="12" y1="20" x2="12" y2="4" />
-        <line x1="6" y1="20" x2="6" y2="14" />
-    </svg>
-);
-
-const ClipboardIcon = () => (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-        <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-    </svg>
-);
 
 const LandingPage: React.FC = () => {
     const handleGetStarted = () => {
-        // Redirect to dashboard login
         window.location.href = 'https://app.spapos.id/login';
     };
 
-    const handleSubscribe = (plan: string) => {
-        const message = `Halo, saya tertarik dengan paket ${plan} SPAPOSPLUS. Mohon info lebih lanjut.`;
-        window.open(`https://wa.me/6281339691260?text=${encodeURIComponent(message)}`, '_blank');
+    const getHandleFeature = () => {
+        window.location.href = '/features';
     };
 
-    const features = [
+    const kenapaReasons = [
         {
-            icon: <CalendarIcon />,
-            title: 'Booking & Reservasi',
-            description: 'Kelola jadwal reservasi spa dengan tampilan kalender yang intuitif dan notifikasi real-time.'
+            icon: (
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+            ),
+            title: 'Pemetaan Manajemen Lebih Terkendali dan Terpusat',
+            subheading: 'Digitalisasi sistem yang jelas dan tepat untuk menghindari celah kecurangan dan human error.'
         },
         {
-            icon: <UsersIcon />,
-            title: 'Manajemen Terapis',
-            description: 'Atur jadwal terapis, pantau kehadiran, dan kelola performa tim spa dengan mudah.'
+            icon: (
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+            ),
+            title: 'Efisiensi Waktu dan  Biaya',
+            subheading: 'Owner bebas pantau cabang dari mana saja, real-time, hemar biaya perjalanan.'
         },
         {
-            icon: <ChartIcon />,
-            title: 'Laporan & Analitik',
-            description: 'Insight bisnis spa dengan laporan penjualan treatment, layanan terpopuler, dan tren pendapatan.'
+            icon: (
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+            ),
+            title: 'Bantu Buat Keputusan Bisnis, Tepat, dan Cepat',
+            subheading: 'Ketersediaan data real-time mempermudah analisis dan bantu perencanaan strategi bisnis.'
+        }
+    ];
+
+    const layananItems = [
+        {
+            icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                </svg>
+            ),
+            text: 'Sistem Pelaporan Real-Time Terkendali'
         },
         {
-            icon: <ClipboardIcon />,
-            title: 'Point of Sale (POS)',
-            description: 'Sistem kasir terintegrasi untuk produk spa, treatment packages, dan invoice pelanggan.'
+            icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+            ),
+            text: 'Manajemen Staff Lebih Mudah'
+        },
+        {
+            icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                    <line x1="12" y1="18" x2="12.01" y2="18" />
+                </svg>
+            ),
+            text: 'Akses Fleksible dengan Multi-Device'
+        },
+        {
+            icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
+            ),
+            text: 'Kendali Penuh Database Pelanggan'
+        },
+        {
+            icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                    <line x1="7.5" y1="4.21" x2="12" y2="7.01" />
+                    <line x1="12" y1="22.08" x2="12" y2="7" />
+                    <line x1="16.5" y1="4.21" x2="12" y2="7.01" />
+                </svg>
+            ),
+            text: 'Kelola Stok Barang Lebih Mudah'
+        },
+        {
+            icon: (
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <line x1="12" y1="1" x2="12" y2="23" />
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+            ),
+            text: 'Laporan Keuangan Lebih Terkendali'
         }
     ];
 
     return (
         <div className="landing-page">
             <SEO
-                title="SPAPOSPLUS - Kelola Spa Tanpa Pusing | Satu Aplikasi untuk Semua Cabang"
+                title="SPAPOS - Kelola Spa Tanpa Pusing | Satu Aplikasi untuk Semua Cabang"
                 description="Booking, manajemen staff, laporan keuangan - semua dalam satu sistem. 2,000+ spa owner di Indonesia sudah membuktikkan. Coba gratis sekarang."
             />
             {/* Navigation */}
@@ -90,31 +126,34 @@ const LandingPage: React.FC = () => {
             {/* Hero Section */}
             <section className="hero-section" id="hero">
                 <div className="hero-content">
-                    {/* Hero Badge - Updated for credibility */}
                     <div className="hero-badge">
                         <span className="hero-badge-dot"></span>
                         <span className="hero-badge-text">Dipercaya oleh 2,000+ Spa Owner</span>
                     </div>
 
-                    <h1 className="hero-title">
-                        Kelola Spa Tanpa Pusing.
-                        <span className="hero-accent"> Satu Aplikasi untuk Semua.</span>
-                    </h1>
+                    <h2 className="hero-title">
+                        Kelola Bisnis SPA Anda dari Mana Saja.
+                        <span className="hero-accent"> Lebih Cepat, Lebih Mudah dengan SPAPOS.</span>
+                    </h2>
                     <p className="hero-subtitle">
-                        Booking, manajemen staff, laporan keuangan - semua dalam satu sistem yang mudah. 2,000+ spa owner di Indonesia sudah membuktikannya.
+                        Pantau setiap cabang secara real-time, minimalkan human error, dan tingkatkan performa bisnis dengan satu sistem terintegrasi
                     </p>
 
-                    {/* CTA Button - Simplified for focus */}
                     <div className="hero-cta-group">
                         <button className="hero-cta hero-cta-primary" onClick={handleGetStarted}>
-                            Coba Gratis
+                            Coba Free Trial
                             <svg className="hero-cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                             </svg>
                         </button>
+                        <button className="hero-cta hero-cta-secondary" onClick={getHandleFeature}>
+                            Lihat Fitur
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </button>
                     </div>
 
-                    {/* Trust Indicators */}
                     <div className="hero-trust">
                         <div className="trust-item">
                             <div className="trust-icon">
@@ -154,362 +193,82 @@ const LandingPage: React.FC = () => {
                 </div>
 
                 <div className="hero-visual">
-                    <div className="hero-mockup">
-                        {/* Mockup Header */}
-                        <div className="mockup-header">
-                            <div className="mockup-dots">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <div className="mockup-title">Dashboard</div>
-                        </div>
-
-                        {/* Mockup Content */}
-                        <div className="mockup-body">
-                            {/* Sidebar */}
-                            <div className="mockup-sidebar">
-                                <div className="sidebar-brand" style={{ background: 'transparent', padding: 0 }}>
-                                    <img src={spaPos09} alt="S+" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                </div>
-                                <div className="sidebar-items">
-                                    <div className="sidebar-item active"></div>
-                                    <div className="sidebar-item"></div>
-                                    <div className="sidebar-item"></div>
-                                    <div className="sidebar-item"></div>
-                                </div>
-                            </div>
-
-                            {/* Main Content */}
-                            <div className="mockup-main">
-                                {/* Stats Cards */}
-                                <div className="mockup-stats">
-                                    <div className="stat-card stat-primary">
-                                        <div className="stat-dot"></div>
-                                        <div className="stat-lines">
-                                            <div className="stat-line stat-line-long"></div>
-                                            <div className="stat-line stat-line-short"></div>
-                                        </div>
-                                    </div>
-                                    <div className="stat-card stat-success">
-                                        <div className="stat-dot"></div>
-                                        <div className="stat-lines">
-                                            <div className="stat-line stat-line-long"></div>
-                                            <div className="stat-line stat-line-short"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Chart Area */}
-                                <div className="mockup-chart">
-                                    <div className="chart-header">
-                                        <div className="chart-title"></div>
-                                        <div className="chart-legend">
-                                            <span></span>
-                                            <span></span>
-                                        </div>
-                                    </div>
-                                    <div className="chart-bars">
-                                        <div className="chart-bar" style={{ height: '40%' }}></div>
-                                        <div className="chart-bar" style={{ height: '65%' }}></div>
-                                        <div className="chart-bar" style={{ height: '45%' }}></div>
-                                        <div className="chart-bar" style={{ height: '80%' }}></div>
-                                        <div className="chart-bar" style={{ height: '55%' }}></div>
-                                        <div className="chart-bar" style={{ height: '90%' }}></div>
-                                        <div className="chart-bar" style={{ height: '70%' }}></div>
-                                    </div>
-                                </div>
-
-                                {/* Recent Activity */}
-                                <div className="mockup-activity">
-                                    <div className="activity-item">
-                                        <div className="activity-dot"></div>
-                                        <div className="activity-line activity-line-long"></div>
-                                    </div>
-                                    <div className="activity-item">
-                                        <div className="activity-dot"></div>
-                                        <div className="activity-line activity-line-medium"></div>
-                                    </div>
-                                    <div className="activity-item">
-                                        <div className="activity-dot"></div>
-                                        <div className="activity-line activity-line-short"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Floating Badge */}
-                        <div className="mockup-badge">
-                            <div className="badge-icon">✓</div>
-                            <div className="badge-content">
-                                <div className="badge-title">Booking Baru</div>
-                                <div className="badge-time">Baru saja</div>
-                            </div>
-                        </div>
+                    <div className="hero-dashboard-screenshot">
+                        <img src={dashboardImg} alt="SPAPOS Dashboard" className="dashboard-img" />
+                        <p className="powered-by">Powered by Wednesdev.id</p>
                     </div>
                 </div>
             </section>
 
-            {/* Features Section */}
-            <section id="features" className="features-section">
-                <div className="section-header">
-                    <h2 className="section-title">Fitur Utama</h2>
-                    <p className="section-subtitle">
-                        Semua yang Anda butuhkan untuk mengelola operasional spa dalam satu tempat
-                    </p>
-                </div>
-                <div className="features-grid">
-                    {features.map((feature, index) => (
-                        <div key={index} className="feature-card">
-                            <div className="feature-icon">{feature.icon}</div>
-                            <h3 className="feature-title">{feature.title}</h3>
-                            <p className="feature-description">{feature.description}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* Video Demo Section */}
-            <VideoDemo />
-
-            {/* Why Choose Us Section */}
-            <WhyChooseUs />
-
-            {/* Services Section */}
-            <section id="services" className="services-section">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="section-header-services">
-                        <h2 className="section-title-services">
-                            Layanan Kami
-                        </h2>
-                        <p className="section-subtitle-services">
-                            Solusi lengkap untuk semua kebutuhan operasional spa Anda
+            {/* Kenapa SPapos Section */}
+            <section className="kenapa-section" id="kenapa">
+                <div className="kenapa-container">
+                    <div className="kenapa-header">
+                        <h2 className="kenapa-title">Kenapa SPAPOS?</h2>
+                        <p className="kenapa-subtitle">
+                            SPAPOS sebagai Investasi Cerdas Bisnis SPA Anda
                         </p>
                     </div>
-
-                    <div className="services-grid">
-                        <div className="service-card">
-                            <div className="service-icon">
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                                    <line x1="16" y1="2" x2="16" y2="6" />
-                                    <line x1="8" y1="2" x2="8" y2="6" />
-                                    <line x1="3" y1="10" x2="21" y2="10" />
-                                </svg>
-                            </div>
-                            <h3 className="service-title">Manajemen Booking</h3>
-                            <p className="service-description">
-                                Otomatisasi reservasi spa, kurangi no-show hingga 60%. Kalender booking intuitif dengan notifikasi WhatsApp otomatis.
-                            </p>
-                            <ul className="service-features">
-                                <li>✓ Kalender booking real-time</li>
-                                <li>✓ Notifikasi WhatsApp otomatis</li>
-                                <li>✓ Manajemen room & terapis</li>
-                            </ul>
-                        </div>
-
-                        <div className="service-card">
-                            <div className="service-icon">
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                </svg>
-                            </div>
-                            <h3 className="service-title">Manajemen Staff & Terapis</h3>
-                            <p className="service-description">
-                                Atur jadwal, pantau performa, dan tracking kehadiran dalam satu aplikasi terintegrasi.
-                            </p>
-                            <ul className="service-features">
-                                <li>✓ Jadwal shift otomatis</li>
-                                <li>✓ Tracking performa terapis</li>
-                                <li>✓ Absensi biometric</li>
-                            </ul>
-                        </div>
-
-                        <div className="service-card">
-                            <div className="service-icon">
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                    <line x1="18" y1="20" x2="18" y2="10" />
-                                    <line x1="12" y1="20" x2="12" y2="4" />
-                                    <line x1="6" y1="20" x2="6" y2="14" />
-                                </svg>
-                            </div>
-                            <h3 className="service-title">Laporan & Analitik Bisnis</h3>
-                            <p className="service-description">
-                                Data-driven decisions untuk growth spa Anda. Insight mendalam dari semua operasional.
-                            </p>
-                            <ul className="service-features">
-                                <li>✓ Laporan revenue harian</li>
-                                <li>✓ Analisis treatment terpopuler</li>
-                                <li>✓ Multi-cabang comparison</li>
-                            </ul>
-                        </div>
-
-                        <div className="service-card">
-                            <div className="service-icon">
-                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                                    <line x1="1" y1="10" x2="23" y2="10" />
-                                </svg>
-                            </div>
-                            <h3 className="service-title">Sistem Kasir (POS)</h3>
-                            <p className="service-description">
-                                Proses pembayaran cepat, rapi, dan profesional. Support berbagai metode pembayaran.
-                            </p>
-                            <ul className="service-features">
-                                <li>✓ Payment multiple channels</li>
-                                <li>✓ Invoice otomatis</li>
-                                <li>✓ Stock management</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Testimonials Section */}
-            <Testimonials />
-
-            {/* Pricing Section */}
-            <section id="pricing" className="py-20 bg-mara-background">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-mara-primary mb-4 font-serif">Biaya Langganan</h2>
-                        <p className="text-gray-500 max-w-2xl mx-auto">
-                            Pilih paket yang sesuai dengan kebutuhan bisnis spa Anda. Investasi terbaik untuk pertumbuhan bisnis.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {/* Monthly Package - 199k */}
-                        <div className="bg-white rounded-2xl p-8 border border-mara-secondary/30 shadow-sm hover:shadow-xl transition-all duration-300">
-                            <h3 className="text-xl font-bold text-mara-primary mb-2">Monthly Package</h3>
-                            <div className="text-sm font-semibold text-gray-500 mb-4">(Bulanan)</div>
-                            <div className="text-4xl font-bold text-mara-accent mb-2">Rp 199.000<span className="text-sm text-gray-400 font-normal">/bulan</span></div>
-                            <p className="text-gray-500 mb-6 text-sm">Paket dasar untuk pengelolaan operasional jangka pendek.</p>
-                            <ul className="space-y-4 mb-8">
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 10 Staff</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 3 Cabang</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Sistem POS</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Laporan</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Manajemen Inventori</li>
-                            </ul>
-                            <button onClick={() => handleSubscribe('Monthly Package')} className="w-full py-3 rounded-lg border-2 border-mara-primary text-mara-primary font-bold hover:bg-mara-primary hover:text-white transition-colors">
-                                Pilih Monthly
-                            </button>
-                        </div>
-
-                        {/* 6-Month Package - 999k */}
-                        <div className="bg-white rounded-2xl p-8 border-2 border-mara-accent shadow-xl transform scale-105 relative">
-                            <div className="absolute top-0 right-0 bg-mara-accent text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">MOST POPULAR</div>
-                            <h3 className="text-xl font-bold text-mara-primary mb-2">6-Month Package</h3>
-                            <div className="text-sm font-semibold text-gray-500 mb-4">(Hemat)</div>
-                            <div className="text-4xl font-bold text-mara-accent mb-2">Rp 999.000<span className="text-sm text-gray-400 font-normal">/6 bulan</span></div>
-                            <p className="text-gray-500 mb-6 text-sm">Lebih hemat dari harga bulanan.</p>
-                            <ul className="space-y-4 mb-8">
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 10 Staff</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 3 Cabang</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Sistem POS</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Laporan Lanjutan</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Manajemen Inventori</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Unlimited Staff (dalam limitasi paket)</li>
-                            </ul>
-                            <button onClick={() => handleSubscribe('6-Month Package')} className="w-full py-3 rounded-lg bg-mara-accent text-white font-bold hover:bg-white hover:text-mara-accent border-2 border-mara-accent transition-colors">
-                                Pilih 6-Month
-                            </button>
-                        </div>
-
-                        {/* Yearly Package - 1.899k */}
-                        <div className="bg-white rounded-2xl p-8 border border-mara-secondary/30 shadow-sm hover:shadow-xl transition-all duration-300">
-                            <h3 className="text-xl font-bold text-mara-primary mb-2">Yearly Package</h3>
-                            <div className="text-sm font-semibold text-gray-500 mb-4">(Super Hemat)</div>
-                            <div className="text-4xl font-bold text-mara-accent mb-1">Rp 1.899.000<span className="text-sm text-gray-400 font-normal">/tahun</span></div>
-                            <div className="text-xs text-mara-primary font-semibold mb-6">(~Rp 158rb/bulan)</div>
-                            <ul className="space-y-4 mb-8">
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 20 Staff</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Maksimal 5 Cabang</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Semua Fitur 6-Month</li>
-                                <li className="flex items-center text-gray-600"><span className="text-mara-accent mr-2">✓</span> Priority Support</li>
-                            </ul>
-                            <button onClick={() => handleSubscribe('Yearly Package')} className="w-full py-3 rounded-lg border-2 border-mara-primary text-mara-primary font-bold hover:bg-mara-primary hover:text-white transition-colors">
-                                Pilih Yearly
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Coverage Section - REMOVED for better social proof credibility */}
-            {/* Coverage stats replaced with customer testimonials */}
-
-            {/* Testimonials Section */}
-            <section className="py-20 bg-white" >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-mara-primary mb-4 font-serif">Kata Mereka</h2>
-                        <p className="text-gray-500 max-w-2xl mx-auto">
-                            Apa kata pemilik bisnis spa yang telah mempercayakan operasional mereka pada SPAPOSPLUS.
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                name: "Sarah Wijaya",
-                                role: "Owner",
-                                spa: "Zen Wellness Jakarta",
-                                content: "Sejak menggunakan SPAPOSPLUS, pencatatan transaksi jadi jauh lebih rapi. Fitur laporannya sangat membantu saya menganalisa performa terapis.",
-                                initial: "S"
-                            },
-                            {
-                                name: "Budi Santoso",
-                                role: "Manager",
-                                spa: "Bali Radiance Spa",
-                                content: "Sistem booking onlinenya juara! Pelanggan jadi lebih mudah reservasi, dan no-show rate kami turun drastis berkat fitur reminder WhatsApp otomatis.",
-                                initial: "B"
-                            },
-                            {
-                                name: "Linda Kusuma",
-                                role: "Owner",
-                                spa: "The Beauty Lounge",
-                                content: "Customer supportnya sangat responsif. Aplikasi mudah digunakan bahkan oleh staff baru. Sangat direkomendasikan untuk bisnis spa yang ingin scale up.",
-                                initial: "L"
-                            }
-                        ].map((testimonial, index) => (
-                            <div key={index} className="bg-mara-background p-8 rounded-2xl shadow-sm border border-mara-secondary/20 relative">
-                                <div className="text-mara-accent text-4xl font-serif absolute top-4 right-6 opacity-20">"</div>
-                                <div className="flex items-center gap-1 mb-4">
-                                    {[...Array(5)].map((_, i) => (
-                                        <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
-                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                                        </svg>
-                                    ))}
-                                </div>
-                                <p className="text-gray-600 mb-6 italic leading-relaxed">"{testimonial.content}"</p>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-mara-primary flex items-center justify-center text-white font-bold text-xl">
-                                        {testimonial.initial}
-                                    </div>
-                                    <div>
-                                        <div className="font-bold text-mara-primary">{testimonial.name}</div>
-                                        <div className="text-sm text-gray-500">{testimonial.role}, {testimonial.spa}</div>
-                                    </div>
-                                </div>
+                    <div className="kenapa-grid">
+                        {kenapaReasons.map((reason, index) => (
+                            <div key={index} className="kenapa-card">
+                                <h3 className="kenapa-card-title">{reason.title}</h3>
+                                <div className="kenapa-card-icon">{reason.icon}</div>
+                                <p className="kenapa-card-subheading">{reason.subheading}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* FAQ Section */}
-            <FAQSection />
+            {/* Layanan SPapos Section */}
+            <section className="layanan-section" id="layanan">
+                <div className="layanan-container">
+                    <div className="layanan-grid">
+                        {/* Left Side */}
+                        <div className="layanan-left">
+                            <h2 className="layanan-heading">
+                                Apa saja yang Anda dapatkan Bersama SPAPOS?
+                            </h2>
+                            <div className="layanan-screenshot-wrapper">
+                                <img src={dashboardImg} alt="SPAPOS Dashboard" className="layanan-dashboard-img" />
+                                <div className="layanan-floating-check">
+                                    <div className="layanan-check-icon">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                    </div>
+                                    <span>Performa Terapis</span>
+                                </div>
+                            </div>
+                        </div>
 
-            {/* CTA Section */}
-            <section className="cta-section" >
+                        {/* Right Side */}
+                        <div className="layanan-right">
+                            <div className="layanan-cards-grid">
+                                {layananItems.map((item, index) => (
+                                    <div key={index} className="layanan-card">
+                                        <div className="layanan-card-icon">{item.icon}</div>
+                                        <span className="layanan-card-text">{item.text}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Demo Produk Section */}
+            <VideoDemo />
+
+            {/* Testimonials Section */}
+            <Testimonials />
+
+            {/* Final CTA Section */}
+            <section className="cta-section">
                 <h2 className="cta-title">Siap Mengelola Spa dengan Lebih Tenang?</h2>
                 <p className="cta-subtitle">
-                    Bergabung dengan SPAPOSPLUS dan rasakan perbedaannya.
+                    Bergabung dengan SPAPOS dan rasakan perbedaannya.
                 </p>
                 <button className="cta-button" onClick={handleGetStarted}>
                     Mulai Gratis
@@ -517,27 +276,60 @@ const LandingPage: React.FC = () => {
             </section>
 
             {/* Footer */}
-            <footer className="landing-footer" >
-                <div className="footer-content">
-                    <div className="footer-brand">
-                        <img src={favicon} alt="SPAPOS" className="footer-logo" />
-                        <div className="footer-brand-text">
+            <footer className="landing-footer">
+                <div className="footer-main">
+                    <div className="footer-brand-col">
+                        <div className="footer-brand">
+                            <img src={favicon} alt="SPAPOS" className="footer-logo" />
                             <span className="logo-text">SPAPOS</span>
-                            <p className="footer-tagline">Spa POS & Management System</p>
+                        </div>
+                        <p className="footer-desc">
+                            Sistem manajemen spa terintegrasi. Booking, POS, laporan & staff management dalam satu platform.
+                        </p>
+                        <div className="footer-socials">
+                            <a href="https://wa.me/6281339691260" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="WhatsApp">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                </svg>
+                            </a>
+                            <a href="https://instagram.com/spapos.id" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
-                    <div className="footer-links">
-                        <a href="#hero" className="footer-link">Beranda</a>
-                        <span className="text-gray-600">•</span>
-                        <a href="#services" className="footer-link">Layanan</a>
-                        <span className="text-gray-600">•</span>
-                        <a href="#pricing" className="footer-link">Biaya</a>
-                        <span className="text-gray-600">•</span>
-                        <Link to="/contact" className="footer-link">Kontak</Link>
-                        <span className="text-gray-600">•</span>
-                        <Link to="/blog" className="footer-link">Blog</Link>
-                        <span className="mt-2 block">© 2026 SPAPOSPLUS. All rights reserved.</span>
+
+                    <div className="footer-nav-col">
+                        <h4 className="footer-col-title">Produk</h4>
+                        <div className="footer-col-links">
+                            <Link to="/features" className="footer-link">Fitur</Link>
+                            <a href="#layanan" className="footer-link">Layanan</a>
+                            <a href="#video-demo" className="footer-link">Demo</a>
+                        </div>
                     </div>
+
+                    <div className="footer-nav-col">
+                        <h4 className="footer-col-title">Perusahaan</h4>
+                        <div className="footer-col-links">
+                            <a href="#hero" className="footer-link">Beranda</a>
+                            <Link to="/blog" className="footer-link">Blog</Link>
+                            <Link to="/contact" className="footer-link">Kontak</Link>
+                        </div>
+                    </div>
+
+                    <div className="footer-nav-col">
+                        <h4 className="footer-col-title">Kontak</h4>
+                        <div className="footer-col-links">
+                            <a href="https://wa.me/6281339691260" target="_blank" rel="noopener noreferrer" className="footer-link">+62 813-3969-1260</a>
+                            <a href="mailto:fara@spapos.id" className="footer-link">fara@spapos.id</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="footer-bottom">
+                    <p>© 2026 SPAPOS. All rights reserved.</p>
+                    <p className="footer-powered">Powered by <strong>Wednesdev.id</strong></p>
                 </div>
             </footer>
         </div>

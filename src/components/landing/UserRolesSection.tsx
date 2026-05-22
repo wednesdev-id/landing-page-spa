@@ -94,7 +94,7 @@ const UserRolesSection: React.FC = () => {
             Setiap Staff Punya Akses Sesuai Perannya
           </h2>
           <p className="section-subtitle-ur">
-            Owner, receptionist, atau terapis - semua bisa gunakan SPAPOSPLUS dengan mudah
+            Owner, receptionist, atau terapis - semua bisa gunakan SPAPOS dengan mudah
           </p>
         </div>
 

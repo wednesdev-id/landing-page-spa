@@ -58,7 +58,7 @@ const BenefitsAdvantages: React.FC = () => {
         {/* Section Header */}
         <div className="section-header-ba">
           <h2 className="section-title-ba">
-            Mengapa Memilih SPAPOSPLUS?
+            Mengapa Memilih SPAPOS?
           </h2>
           <p className="section-subtitle-ba">
             Sistem manajemen spa yang dirancang khusus untuk bisnis spa Indonesia. Mudah, lengkap, dan terjangkau.
@@ -85,7 +85,7 @@ const BenefitsAdvantages: React.FC = () => {
         <div className="benefits-cta">
           <div className="benefits-cta-content">
             <h3>Siap Transformasi Bisnis Spa Anda?</h3>
-            <p>Join 2,000+ spa owners yang sudah menggunakan SPAPOSPLUS</p>
+            <p>Join 2,000+ spa owners yang sudah menggunakan SPAPOS</p>
           </div>
           <button
             className="benefits-cta-button"

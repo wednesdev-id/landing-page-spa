@@ -52,7 +52,7 @@ const Blog: React.FC = () => {
     return (
         <Layout className="min-h-screen bg-mara-background font-sans">
             <SEO
-                title="Blog - SPAPOSPLUS"
+                title="Blog - SPAPOS"
                 description="Discover tips, tutorials, and success stories to help you grow your spa and salon business."
             />
 
@@ -116,7 +116,7 @@ const Blog: React.FC = () => {
                 )}
 
                 <Footer className="text-center bg-white border-t border-mara-secondary/30 py-12 mt-16 bg-transparent">
-                    <Text className="text-gray-500">© 2026 SPAPOSPLUS. All rights reserved.</Text>
+                    <Text className="text-gray-500">© 2026 SPAPOS. All rights reserved.</Text>
                 </Footer>
             </Content>
         </Layout>

@@ -217,7 +217,7 @@ export default function BlogPost() {
                         <img src={spaPos09} alt="Logo" className="h-8 w-auto opacity-70 grayscale hover:grayscale-0 transition-all" />
                     </div>
                     <p className="text-gray-500 text-sm">
-                        © 2026 SPAPOSPLUS. All rights reserved.
+                        © 2026 SPAPOS. All rights reserved.
                     </p>
                 </div>
             </footer>

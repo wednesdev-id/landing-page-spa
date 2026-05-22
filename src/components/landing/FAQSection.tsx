@@ -11,7 +11,7 @@ const FAQSection: React.FC = () => {
 
   const faqs: FAQ[] = [
     {
-      question: 'Berapa lama waktu yang dibutuhkan untuk setup SPAPOSPLUS?',
+      question: 'Berapa lama waktu yang dibutuhkan untuk setup SPAPOS?',
       answer: 'Setup awal hanya membutuhkan waktu 5-10 menit. Anda hanya perlu mendaftar, membuat organization, menambahkan cabang pertama, dan mulai input data dasar (services, products, staff). Data yang lebih detail bisa ditambahkan secara bertahap seiring berjalannya operasional.'
     },
     {
@@ -28,11 +28,11 @@ const FAQSection: React.FC = () => {
     },
     {
       question: 'Apakah perlu install software di komputer?',
-      answer: 'Tidak perlu! SPAPOSPLUS adalah cloud-based system, jadi Anda bisa mengaksesnya dari browser di mana saja - laptop, tablet, atau smartphone. Tidak perlu install, tidak perlu update manual, selalu otomatis update ke versi terbaru.'
+      answer: 'Tidak perlu! SPAPOS adalah cloud-based system, jadi Anda bisa mengaksesnya dari browser di mana saja - laptop, tablet, atau smartphone. Tidak perlu install, tidak perlu update manual, selalu otomatis update ke versi terbaru.'
     },
     {
       question: 'Bagaimana dengan training untuk staff?',
-      answer: 'SPAPOSPLUS dirancang sangat intuitive dan mudah digunakan. Sebagian besar user bisa langsung pakai tanpa training khusus. Kami juga menyediakan user guide dan video tutorial. Kalau ada pertanyaan, tim support kami ready 24/7 via WhatsApp.'
+      answer: 'SPAPOS dirancang sangat intuitive dan mudah digunakan. Sebagian besar user bisa langsung pakai tanpa training khusus. Kami juga menyediakan user guide dan video tutorial. Kalau ada pertanyaan, tim support kami ready 24/7 via WhatsApp.'
     }
   ];
 
@@ -49,7 +49,7 @@ const FAQSection: React.FC = () => {
             Pertanyaan yang Sering Diajukan
           </h2>
           <p className="section-subtitle-faq">
-            Jawaban untuk pertanyaan umum tentang SPAPOSPLUS
+            Jawaban untuk pertanyaan umum tentang SPAPOS
           </p>
         </div>
 
@@ -79,7 +79,7 @@ const FAQSection: React.FC = () => {
           <p>Masih punya pertanyaan?</p>
           <button
             className="faq-cta-button"
-            onClick={() => window.open(`https://wa.me/6281339691260?text=${encodeURIComponent('Halo, saya ingin bertanya lebih lanjut tentang SPAPOSPLUS.')}`, '_blank')}
+            onClick={() => window.open(`https://wa.me/6281339691260?text=${encodeURIComponent('Halo, saya ingin bertanya lebih lanjut tentang SPAPOS.')}`, '_blank')}
           >
             Chat dengan Kami
           </button>

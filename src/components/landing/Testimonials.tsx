@@ -36,11 +36,8 @@ const Testimonials: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="section-header-test">
           <h2 className="section-title-test">
-            Apa Kata Spa Owner?
+            Apa Mereka Setelah Merasakah Kemudahan SPAPOS?
           </h2>
-          <p className="section-subtitle-test">
-            Ribuan spa owner sudah membuktikan manfaat SPAPOS. Ini cerita sukses mereka.
-          </p>
         </div>
 
         <div className="testimonials-grid">
