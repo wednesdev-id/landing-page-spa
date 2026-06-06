@@ -1,0 +1,178 @@
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee-left 40s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.pause-on-hover:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Abstract Icons for Product Cards */
+.product-abstract {
+    position: relative;
+    width: 140px;
+    height: 100px;
+}
+
+.ab-window {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.ab-header {
+    height: 12px;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.ab-body {
+    padding: 8px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ab-body.flex-row {
+    flex-direction: row;
+}
+
+.ab-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ab-box-large {
+    height: 30px;
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.ab-box-small-group {
+    display: flex;
+    gap: 6px;
+}
+
+.ab-box-s {
+    height: 20px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.ab-list-item {
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.ab-list-item.w-half {
+    width: 60%;
+}
+
+.ab-badge {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #10b981;
+}
+
+.ab-badge-bottom-right {
+    bottom: -10px;
+    right: -10px;
+}
+
+.ab-badge-top-left {
+    top: -10px;
+    left: -10px;
+}
+
+.ab-badge-top-right {
+    top: -10px;
+    right: -10px;
+}
+
+.ab-calendar {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.ab-cal-header {
+    height: 12px;
+    background: #f1f5f9;
+}
+
+.ab-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 8px;
+    flex: 1;
+}
+
+.ab-cal-cell {
+    background: #e2e8f0;
+    border-radius: 2px;
+}
+
+.ab-cal-cell.active {
+    background: #10b981;
+}
+
+.ab-chart {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.ab-bar-group {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+}
+
+.ab-bar {
+    flex: 1;
+    background: #e2e8f0;
+    border-radius: 2px 2px 0 0;
+}
+
+.ab-bar.h-1 { height: 40%; }
+.ab-bar.h-2 { height: 70%; }
+.ab-bar.h-3 { height: 50%; }
+.ab-bar.h-4 { height: 90%; background: #10b981; }

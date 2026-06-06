@@ -49,11 +49,9 @@ const Integrations: React.FC = () => {
     <section className="integrations-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="section-header-int">
-          <h2 className="section-title-int">
-            Integrasi Lengkap dengan Ekosistem Anda
-          </h2>
-          <p className="section-subtitle-int">
+        <div className="section-header text-center">
+          <h2 className="section-title">Integrasi Cerdas Untuk Berbagai Kebutuhan</h2>
+          <p className="section-subtitle">
             SPAPOS terhubung dengan berbagai layanan untuk memudahkan operasional bisnis Anda
           </p>
         </div>

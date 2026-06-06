@@ -1,0 +1,207 @@
+/* 1. Component: Navbar Container */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: #ffffff;
+    border-bottom: 1px solid transparent;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    border-bottom: 1px solid #f3f4f6;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-container {
+    max-width: 1280px;
+    height: 80px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .navbar-container {
+        padding: 0 24px;
+    }
+}
+
+/* 2 & 3. Component: Brand Identity (Logo) */
+.navbar-logo-group {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar-logo-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    fill: #143C3C;
+    margin-right: 12px;
+}
+
+.navbar-brand-text {
+    display: inline-block;
+    font-family: "Playfair Display", "Times New Roman", Times, serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+    color: #143C3C;
+    margin: 0;
+}
+
+/* Layout wrapper for right side elements */
+.navbar-right-group {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .navbar-right-group {
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* 4 & 5. Component: Navigation Links */
+.navbar-nav-group {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-link {
+    display: inline-block;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-right: 40px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navbar-link:last-child {
+    margin-right: 64px; /* Space between last link and CTA */
+}
+
+.navbar-link.active {
+    font-weight: 600;
+    color: #143C3C;
+}
+
+.navbar-link.inactive {
+    font-weight: 500;
+    color: #4b5563;
+}
+
+.navbar-link.inactive:hover {
+    color: #143C3C;
+}
+
+/* 6 & 7. Component: CTA Button */
+.navbar-cta-button {
+    height: 48px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: #315c54;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.navbar-cta-button:hover {
+    background-color: #244741;
+}
+
+.navbar-cta-button:active {
+    background-color: #1a332f;
+}
+
+.navbar-cta-text {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    color: #ffffff;
+}
+
+.navbar-cta-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    stroke: #ffffff;
+    margin-left: 8px;
+}
+
+/* Mobile Menu Fallbacks (Since spec omitted explicit rules for mobile beyond hiding desktop items) */
+.mobile-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: #111827;
+    cursor: pointer;
+    padding: 8px;
+}
+
+@media (min-width: 768px) {
+    .mobile-toggle {
+        display: none;
+    }
+}
+
+.mobile-menu-wrapper {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 40;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.mobile-link {
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.mobile-link.active {
+    color: #143C3C;
+    font-weight: 600;
+}
+
+.mobile-cta {
+    background-color: #315c54;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+}

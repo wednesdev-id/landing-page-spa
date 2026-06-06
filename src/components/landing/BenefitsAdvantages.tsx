@@ -56,11 +56,9 @@ const BenefitsAdvantages: React.FC = () => {
     <section className="benefits-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="section-header-ba">
-          <h2 className="section-title-ba">
-            Mengapa Memilih SPAPOS?
-          </h2>
-          <p className="section-subtitle-ba">
+        <div className="section-header text-center">
+          <h2 className="section-title">Manfaat Menggunakan Sistem Kami</h2>
+          <p className="section-subtitle">
             Sistem manajemen spa yang dirancang khusus untuk bisnis spa Indonesia. Mudah, lengkap, dan terjangkau.
           </p>
         </div>

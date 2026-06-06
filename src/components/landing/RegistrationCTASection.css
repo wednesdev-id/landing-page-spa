@@ -1,0 +1,209 @@
+.registration-section {
+    padding: var(--spacing-80) 0;
+    background-color: #f0f7f6; /* Very light subtle green/teal background matching design */
+    overflow: hidden;
+}
+
+.registration-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-24);
+}
+
+.reg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-64);
+    align-items: center;
+}
+
+/* Left side */
+.reg-info {
+    padding-right: var(--spacing-32);
+}
+
+.reg-info h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-16);
+}
+
+.reg-info p {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-32);
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-12);
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: var(--spacing-12) var(--spacing-24);
+    border-radius: var(--radius-12);
+    font-weight: 600;
+    color: var(--color-text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-google:hover {
+    background: #f9fafb;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Right side form */
+.reg-form-wrapper {
+    position: relative;
+}
+
+/* Optional abstract background shape for the form */
+.reg-form-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: 20px;
+    background: #e6f0ef;
+    border-radius: var(--radius-20);
+    z-index: 0;
+}
+
+.reg-form-card {
+    background: white;
+    border-radius: var(--radius-20);
+    padding: var(--spacing-48);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 1;
+}
+
+.form-header {
+    margin-bottom: var(--spacing-32);
+}
+
+.form-header h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    margin-bottom: var(--spacing-8);
+}
+
+.form-header p {
+    color: var(--color-text-muted);
+}
+
+.mock-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-24);
+}
+
+.form-row {
+    display: flex;
+    gap: var(--spacing-16);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-main);
+}
+
+.form-group input {
+    width: 100%;
+    padding: var(--spacing-12) var(--spacing-16);
+    border: 1px solid #e5e7eb;
+    border-radius: var(--radius-12);
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--color-primary);
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon svg {
+    position: absolute;
+    left: var(--spacing-12);
+    pointer-events: none;
+}
+
+.input-with-icon input {
+    padding-left: var(--spacing-48);
+}
+
+.input-with-icon.right-icon svg {
+    left: auto;
+    right: var(--spacing-12);
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.input-with-icon.right-icon input {
+    padding-left: var(--spacing-16);
+    padding-right: var(--spacing-48);
+}
+
+.btn-submit {
+    width: 100%;
+    background: var(--color-primary);
+    color: white;
+    padding: var(--spacing-16);
+    border-radius: var(--radius-12);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: var(--spacing-8);
+}
+
+.btn-submit:hover {
+    background: #0c3032;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .reg-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-48);
+    }
+    
+    .reg-info {
+        padding-right: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .reg-form-card {
+        padding: var(--spacing-24);
+    }
+}

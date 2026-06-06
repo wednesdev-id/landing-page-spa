@@ -50,10 +50,10 @@ const WhyChooseUs: React.FC = () => {
     <section className="why-choose-us-section" id="why-choose-us">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="section-header-wcu">
-          <h2 className="section-title-wcu">
-            Mengapa 2,000+ Spa Owner Memilih Kami?
+          <h2 className="section-title">
+            Mengapa SPAPOS Adalah Pilihan Terbaik?
           </h2>
-          <p className="section-subtitle-wcu">
+          <p className="section-subtitle">
             Sistem yang dirancang khusus untuk kebutuhan spa Indonesia. Mudah, hemat, dan terpercaya.
           </p>
         </div>

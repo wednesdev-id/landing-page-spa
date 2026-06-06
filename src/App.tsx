@@ -5,7 +5,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from "./contexts/AuthContext";
 import LandingPage from "./pages/LandingPage";
 import Features from "./pages/Features";
-import Pricing from "./pages/Pricing";
 import Blog from "./pages/Blog";
 import AdminBlog from "./pages/AdminBlog";
 import BlogPost from "./pages/BlogPost";
@@ -30,7 +29,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/features" element={<Features />} />
-                <Route path="/pricing" element={<Pricing />} />
+                {/* <Route path="/pricing" element={<Pricing />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />}>
                   <Route index element={<DashboardHome />} />

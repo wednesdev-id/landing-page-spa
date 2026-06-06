@@ -90,10 +90,10 @@ const UserRolesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="section-header-ur">
-          <h2 className="section-title-ur">
-            Setiap Staff Punya Akses Sesuai Perannya
+          <h2 className="section-title">
+            SPAPOS Bekerja Untuk Semua Peran
           </h2>
-          <p className="section-subtitle-ur">
+          <p className="section-subtitle">
             Owner, receptionist, atau terapis - semua bisa gunakan SPAPOS dengan mudah
           </p>
         </div>

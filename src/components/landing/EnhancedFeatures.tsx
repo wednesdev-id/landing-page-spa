@@ -85,11 +85,9 @@ const EnhancedFeatures: React.FC = () => {
     <section className="enhanced-features-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="section-header-ef">
-          <h2 className="section-title-ef">
-            Semua yang Anda Butuhkan untuk Mengelola Spa dengan Mudah
-          </h2>
-          <p className="section-subtitle-ef">
+        <div className="section-header text-center">
+          <h2 className="section-title">Semua yang Anda butuhkan, dalam satu aplikasi</h2>
+          <p className="section-subtitle">
             Dari booking sampai laporan keuangan, semua dalam satu aplikasi yang mudah digunakan
           </p>
         </div>
