@@ -25,16 +25,13 @@ const Navbar: React.FC = () => {
     const getActiveState = (path: string) => {
         if (path === 'home') return isHome && window.location.hash === '';
         if (path === '/blog') return location.pathname === '/blog';
-        if (path === '/features') return location.pathname === '/features';
-        if (path === '/contact') return location.pathname === '/contact';
         return false;
     };
 
     const navLinks = [
         { name: 'Beranda', path: isHome ? '#hero' : '/', activeKey: 'home' },
-        { name: 'Fitur', path: '/features', activeKey: '/features' },
-        { name: 'Biaya', path: isHome ? '#pricing' : '/#pricing', activeKey: '' },
-        { name: 'Kontak', path: '/contact', activeKey: '/contact' }
+        { name: 'Fitur', path: isHome ? '#features' : '/#features', activeKey: '' },
+        { name: 'Biaya', path: isHome ? '#pricing' : '/#pricing', activeKey: '' }
     ];
 
     return (
