@@ -4,7 +4,7 @@ import { ConfigProvider, App as AntApp } from "antd";
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from "./contexts/AuthContext";
 import LandingPage from "./pages/LandingPage";
-import Features from "./pages/Features";
+
 import Blog from "./pages/Blog";
 import AdminBlog from "./pages/AdminBlog";
 import BlogPost from "./pages/BlogPost";
