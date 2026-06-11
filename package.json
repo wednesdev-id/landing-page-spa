@@ -6,6 +6,9 @@
   "prisma": {
     "schema": "api/prisma/schema.prisma"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "server": "tsx api/index.ts",
