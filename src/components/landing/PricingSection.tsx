@@ -38,8 +38,8 @@ const PricingSection: React.FC = () => {
         {
             title: 'Yearly Package\n(Tahunan)',
             subtitle: 'Paket hemat untuk bisnis skala kecil',
-            price: 'Rp 189',
-            priceSuffix: '.000.000',
+            price: 'Rp 1.890',
+            priceSuffix: '.000',
             features: [
                 'Maksimal 10 staff',
                 'Maksimal 3 cabang',
