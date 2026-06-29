@@ -163,7 +163,7 @@ const Pricing: React.FC = () => {
 
             {/* CTA */}
             <section className="pricing-cta-section">
-                <h2 className="pricing-cta-title">Masih Ragu? Coba Gratis Dulu</h2>
+                <h2 className="pricing-cta-title">Masih Ragu? Coba Trial 90 Hari Dulu</h2>
                 <p className="pricing-cta-subtitle">
                     Nikmati semua fitur SPAPOS tanpa biaya selama masa trial
                 </p>

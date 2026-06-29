@@ -38,7 +38,7 @@ const VideoDemo: React.FC = () => {
                 onClick={handleGetStarted}
                 className="h-full inline-flex items-center justify-center gap-[8px] bg-[#0F3D3E] text-[#FFFFFF] px-[32px] rounded-[12px] font-[600] text-[16px] border-none cursor-pointer hover:bg-[#0d3536] transition-colors shadow-[0_4px_14px_rgba(15,61,62,0.3)]"
               >
-                Coba Gratis Sekarang
+                Coba Trial 90 Hari
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>

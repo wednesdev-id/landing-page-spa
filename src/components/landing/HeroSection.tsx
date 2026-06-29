@@ -16,18 +16,17 @@ const HeroSection: React.FC = () => {
                     data multisite Anda ke dalam satu dasbor terpusat yang real-time.
                 </p>
 
-                {/* CTA Group */}
                 <div className="mt-[40px] mb-[64px] flex flex-col md:flex-row gap-[16px] w-full md:w-auto">
-                    <button className="h-[56px] px-[32px] rounded-[8px] text-[16px] font-[600] bg-[#315c54] text-[#ffffff] border-none flex items-center justify-center gap-[8px] w-full md:w-auto">
-                        Coba Gratis Sekarang
+                    <button className="h-[56px] px-[32px] rounded-[8px] text-[16px] font-[600] bg-[#315c54] text-[#ffffff] border-none flex items-center justify-center gap-[8px] w-full md:w-auto cursor-pointer">
+                        Coba Trial 90 Hari
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                             <polyline points="12 5 19 12 12 19"></polyline>
                         </svg>
                     </button>
-                    <button className="h-[56px] px-[32px] rounded-[8px] text-[16px] font-[600] bg-[#ffffff] text-[#111827] border border-solid border-[#D1D5DB] w-full md:w-auto">
+                    <a href="#video-demo" className="h-[56px] px-[32px] rounded-[8px] text-[16px] font-[600] bg-[#ffffff] text-[#111827] border border-solid border-[#D1D5DB] w-full md:w-auto flex items-center justify-center no-underline cursor-pointer">
                         Lihat Demo
-                    </button>
+                    </a>
                 </div>
             </div>
 

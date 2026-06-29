@@ -53,6 +53,10 @@ const PricingSection: React.FC = () => {
         }
     ];
 
+    const handleRegisterClick = () => {
+        window.location.href = 'https://app.spapos.id/login';
+    };
+
     return (
         <section className="pricing-section" id="pricing">
             <div className="container">
@@ -63,7 +67,7 @@ const PricingSection: React.FC = () => {
 
                 <div className="pricing-grid">
                     {packages.map((pkg, idx) => (
-                        <div className={`pricing-card ${pkg.highlighted ? 'highlighted' : ''}`} key={idx}>
+                        <div className={`pricing-card ${pkg.highlighted ? 'highlighted' : ''}`} key={idx} onClick={handleRegisterClick} style={{ cursor: 'pointer' }}>
                             <div className="pricing-card-header">
                                 <h3 className="pricing-title">{pkg.title.split('\n').map((line, i) => <React.Fragment key={i}>{line}<br/></React.Fragment>)}</h3>
                                 <p className="pricing-subtitle">{pkg.subtitle}</p>

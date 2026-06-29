@@ -19,16 +19,16 @@ const LandingPage: React.FC = () => {
         <div className="landing-page new-design">
             <SEO
                 title="SPAPOS - Kelola Spa Tanpa Pusing | Satu Aplikasi untuk Semua Cabang"
-                description="Booking, manajemen staff, laporan keuangan - semua dalam satu sistem. 2,000+ spa owner di Indonesia sudah membuktikkan. Coba gratis sekarang."
+                description="Booking, manajemen staff, laporan keuangan - semua dalam satu sistem. 2,000+ spa owner di Indonesia sudah membuktikkan. Coba trial 90 hari sekarang."
             />
             <Navbar />
             <HeroSection />
-            <TrustedBySection />
+            {/* <TrustedBySection /> */}
             <FeatureShowcaseSection />
             <ProductOverviewSection />
             <VideoDemo />
             <RegistrationCTASection />
-            <Testimonials />
+            {/* <Testimonials /> */}
             <PricingSection />
             <FAQSection />
             <FinalCTASection />
