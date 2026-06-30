@@ -1,32 +1,86 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import './Trial90Section.css';
 
 const milestones = [
-  ['Minggu 1-2', 'Mulai rapikan data layanan, staf, dan stok.'],
-  ['Bulan 1', 'Jalankan alur booking dan kasir.'],
-  ['Bulan 2-3', 'Pantau laporan dan evaluasi kenyamanan.'],
+  {
+    label: 'Minggu 1-2',
+    title: 'Rapikan fondasi operasional',
+    desc: 'Mulai dari data layanan, staf, dan stok agar alur kerja lebih tertata.',
+  },
+  {
+    label: 'Bulan 1',
+    title: 'Jalankan operasional harian',
+    desc: 'Booking, kasir, dan jadwal staf mulai berjalan lebih stabil dan konsisten.',
+  },
+  {
+    label: 'Bulan 2-3',
+    title: 'Evaluasi dan optimalkan',
+    desc: 'Pantau laporan, temukan bottleneck, lalu rapikan alur yang masih mengganggu.',
+  },
 ];
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 130,
+      damping: 18,
+    },
+  },
+};
 
 const Trial90Section: React.FC = () => {
   return (
-    <section id="trial" className="w-full bg-[#FAF8F5] py-20 md:py-32">
-      <div className="mx-auto flex w-full max-w-4xl flex-col gap-12 px-5 text-center">
-        <div>
-          <h2 className="text-3xl font-medium leading-tight text-[#1C2926] md:text-4xl">
+    <section id="trial" className="trial-section">
+      <div className="trial-container">
+        <div className="trial-header">
+          <h2 className="trial-title">
             Coba dulu 90 hari, rasakan perubahannya
           </h2>
+          <p className="trial-subtitle">
+            Roadmap trial dibuat bertahap supaya tim Anda bisa adaptasi tanpa terasa berat.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {milestones.map(([time, desc]) => (
-            <div key={time} className="flex flex-col items-center rounded-3xl bg-white p-8 shadow-sm">
-              <span className="mb-4 text-xs font-semibold uppercase tracking-widest text-[#8B9895]">{time}</span>
-              <p className="text-sm leading-relaxed text-[#1C2926]">{desc}</p>
-            </div>
+        <motion.div
+          className="trial-roadmap"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {milestones.map((milestone, index) => (
+            <motion.article key={milestone.label} className="trial-card" variants={cardVariants}>
+              <div className="trial-card-head">
+                <span className="trial-badge">{String(index + 1).padStart(2, '0')}</span>
+                <span className="trial-label">{milestone.label}</span>
+              </div>
+              <h3 className="trial-card-title">{milestone.title}</h3>
+              <p className="trial-card-desc">{milestone.desc}</p>
+              <div className="trial-card-progress" aria-hidden="true">
+                <span />
+              </div>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mx-auto mt-6 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          <a href="https://app.spapos.id/login" className="flex h-14 w-full items-center justify-center rounded-2xl bg-[#2A4D45] px-8 text-base font-medium text-white no-underline shadow-lg shadow-[#2A4D45]/20 sm:w-auto">
+        <div className="trial-cta-wrap">
+          <a href="https://app.spapos.id/login" className="trial-cta">
             Mulai Trial 90 Hari
           </a>
         </div>

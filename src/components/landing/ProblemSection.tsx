@@ -25,7 +25,7 @@ const ProblemSection: React.FC = () => {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-12 px-5 text-center">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-3xl font-medium leading-tight text-[#1C2926] md:text-4xl">
-            Hal kecil yang pelan-pelan mengganggu profit & ketenangan Anda
+            Detail Kecil yang Diam-Diam Mengurangi Omzet Spa Anda
           </h2>
         </div>
 
