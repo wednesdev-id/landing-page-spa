@@ -1,80 +1,38 @@
 import React, { useState } from 'react';
 import './FAQSection.css';
 
-interface FAQ {
-  question: string;
-  answer: string;
-}
+interface FAQ { question: string; answer: string; }
 
 const FAQSection: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(1); // Open the second one by default to match design
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqs: FAQ[] = [
-    {
-      question: 'Apakah data transaksi dan laporan keuangan antar cabang akan tercampur di dalam sistem?',
-      answer: 'Tidak. SPAPOS memisahkan data transaksi dan laporan per cabang, namun Anda sebagai owner tetap dapat melihat rekapitulasi gabungan di dasbor pusat.'
-    },
-    {
-      question: 'Bagaimana cara sistem memotong stok bahan baku secara otomatis?',
-      answer: 'Setiap kali status reservasi berubah menjadi berjalan, sistem secara otomatis akan memotong persediaan bahan habis pakai (seperti minyak pijat atau krim) sesuai dengan takaran yang sudah Anda tentukan untuk layanan tersebut.'
-    },
-    {
-      question: 'Apakah sistem membership pelanggan berlaku di semua cabang?',
-      answer: 'Ya, sistem membership terintegrasi antar cabang. Pelanggan dapat menikmati benefit mereka di cabang mana pun tanpa perlu pendataan ulang.'
-    },
-    {
-      question: 'Bagaimana jika terapis bertukar shift kerja secara mendadak di lapangan?',
-      answer: 'Manajer cabang dapat dengan mudah menyesuaikan jadwal shift di sistem. Semua reservasi yang terhubung akan otomatis menyesuaikan ketersediaan terapis.'
-    },
-    {
-      question: 'Apakah laporan komisi dan kinerja terapis bisa dihitung otomatis?',
-      answer: 'Tentu saja. Sistem secara otomatis menghitung komisi berdasarkan layanan yang diselesaikan oleh masing-masing terapis, yang bisa Anda akses laporannya secara real-time.'
-    }
+    { question: 'Bisa dipakai untuk beberapa cabang?', answer: 'Bisa. Anda bisa melihat ringkasan semua cabang dengan tenang dari satu dashboard.' },
+    { question: 'Pemakaian bahan tercatat otomatis?', answer: 'Bisa. Pemakaian oil, cream, dan lulur dapat tercatat agar stok tidak mudah bocor.' },
+    { question: 'Komisi terapis dihitung sistem?', answer: 'Ya, komisi dihitung otomatis dari transaksi sehingga proses rekap lebih rapi.' },
+    { question: 'Bisa dicoba dulu?', answer: 'Bisa. Anda dapat mulai dari trial 90 hari untuk mencoba kecocokan alurnya.' },
   ];
 
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <section className="faq-section" id="faq">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="section-header text-center">
-          <h2 className="section-title">Pertanyaan yang Sering Diajukan</h2>
-          <p className="section-subtitle">
-            Kami merangkum hal-hal penting yang paling sering ditanyakan oleh para pemilik bisnis spa sebelum mengintegrasikan sistem mereka dengan platform kami.
-          </p>
-        </div>
-
-        {/* FAQ List */}
-        <div className="faq-list">
+    <section id="faq" className="w-full bg-[#FAF8F5] py-20 md:py-32">
+      <div className="mx-auto max-w-3xl px-5 text-center">
+        <h2 className="text-3xl font-medium leading-tight text-[#1C2926]">Pertanyaan umum</h2>
+        
+        <div className="mt-10 flex flex-col gap-3 text-left">
           {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`faq-item ${openIndex === index ? 'open' : ''}`}
-            >
-              <button
-                className="faq-question"
-                onClick={() => toggleFAQ(index)}
+            <div key={index} className="rounded-3xl bg-white p-2 shadow-sm">
+              <button 
+                className="flex w-full items-center justify-between p-4 text-left font-medium text-[#1C2926] outline-none" 
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
               >
-                <span className="faq-question-text">{faq.question}</span>
-                <span className="faq-icon">
-                    {openIndex === index ? (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                    ) : (
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                    )}
-                </span>
+                <span>{faq.question}</span>
+                <span className="text-[#8B9895]">{openIndex === index ? '−' : '+'}</span>
               </button>
-              <div className={`faq-answer ${openIndex === index ? 'show' : ''}`}>
-                <p>{faq.answer}</p>
-              </div>
+              {openIndex === index && (
+                <div className="px-4 pb-4 text-sm leading-relaxed text-[#5A6B67]">
+                  {faq.answer}
+                </div>
+              )}
             </div>
           ))}
         </div>

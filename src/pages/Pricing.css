@@ -74,6 +74,11 @@
   position: relative;
 }
 
+.pricing-card-annual {
+  border-color: #C6A86D;
+  box-shadow: 0 12px 40px rgba(198, 168, 109, 0.12);
+}
+
 .pricing-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
@@ -90,6 +95,19 @@
 }
 
 .pricing-popular-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #C6A86D;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0 20px 0 12px;
+  letter-spacing: 0.04em;
+}
+
+.pricing-annual-badge {
   position: absolute;
   top: 0;
   right: 0;
@@ -122,6 +140,13 @@
 
 .pricing-card-price {
   margin-bottom: 0.25rem;
+}
+
+.pricing-price-old {
+  font-size: 0.875rem;
+  color: #888;
+  text-decoration: line-through;
+  margin-bottom: 0.5rem;
 }
 
 .pricing-price-value {

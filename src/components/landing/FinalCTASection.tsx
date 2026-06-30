@@ -1,32 +1,26 @@
 import React from 'react';
 
 const FinalCTASection: React.FC = () => {
-    const handleGetStarted = () => {
-        window.location.href = 'https://app.spapos.id/login';
-    };
-
-    return (
-        <section 
-            className="w-full py-[120px] overflow-hidden flex flex-col items-center justify-center"
-            style={{ backgroundImage: 'radial-gradient(ellipse at center, #e8f5f2 0%, #ffffff 100%)' }}
-        >
-            <div className="max-w-[800px] w-full flex flex-col items-center justify-center gap-[40px] px-4">
-                <h2 className="text-[48px] font-semibold text-center text-[#111827] leading-[1.2] tracking-tight">
-                    Siap Kendalikan Penuh Semua Bisnis<br />Spa Anda?
-                </h2>
-                <button 
-                    className="flex flex-row items-center justify-center gap-[8px] h-[56px] py-[16px] px-[40px] rounded-[8px] bg-[#375854] text-[#FFFFFF] text-[16px] font-medium" 
-                    onClick={handleGetStarted}
-                >
-                    Coba SPAPOS Sekarang
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </button>
-            </div>
-        </section>
-    );
+  return (
+    <section className="w-full bg-[#2A4D45] py-20 px-5 text-center md:py-32">
+      <div className="mx-auto flex max-w-3xl flex-col items-center">
+        <h2 className="text-3xl font-medium leading-tight text-white md:text-5xl">
+          Rapikan operasional spa Anda agar bisnis terasa lebih tenang
+        </h2>
+        <p className="mt-6 text-base leading-relaxed text-[#F4F1EC] md:text-lg">
+          Kontrol booking, stok, komisi, dan laporan cabang dengan lebih rapi dari satu tempat.
+        </p>
+        <div className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+          <a href="https://wa.me/6281234567890" className="flex h-14 w-full items-center justify-center rounded-2xl bg-white px-8 text-base font-medium text-[#2A4D45] no-underline sm:w-auto">
+            Konsultasi WhatsApp
+          </a>
+          <a href="https://app.spapos.id/login" className="flex h-14 w-full items-center justify-center rounded-2xl border border-white/20 bg-white/5 px-8 text-base font-medium text-white no-underline sm:w-auto">
+            Coba Gratis 90 Hari
+          </a>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default FinalCTASection;

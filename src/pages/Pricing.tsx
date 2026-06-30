@@ -19,9 +19,11 @@ const Pricing: React.FC = () => {
             name: 'Monthly Package',
             period: 'Bulanan',
             price: 'Rp 199.000',
+            oldPrice: 'Rp 249.000',
             priceUnit: '/bulan',
             description: 'Paket dasar untuk pengelolaan operasional jangka pendek.',
             popular: false,
+            annual: false,
             features: [
                 'Maksimal 10 Staff',
                 'Maksimal 3 Cabang',
@@ -34,9 +36,11 @@ const Pricing: React.FC = () => {
             name: '6-Month Package',
             period: 'Hemat',
             price: 'Rp 999.000',
+            oldPrice: 'Rp 1.199.000',
             priceUnit: '/6 bulan',
             description: 'Lebih hemat dari harga bulanan.',
             popular: true,
+            annual: false,
             features: [
                 'Maksimal 10 Staff',
                 'Maksimal 3 Cabang',
@@ -48,12 +52,14 @@ const Pricing: React.FC = () => {
         },
         {
             name: 'Yearly Package',
-            period: 'Super Hemat',
+            period: '1 Tahun',
             price: 'Rp 1.899.000',
+            oldPrice: 'Rp 2.390.000',
             priceUnit: '/tahun',
-            priceNote: '~Rp 158rb/bulan',
+            priceNote: 'Paling hemat per bulan',
             description: 'Investasi terbaik untuk pertumbuhan bisnis jangka panjang.',
             popular: false,
+            annual: true,
             features: [
                 'Maksimal 20 Staff',
                 'Maksimal 5 Cabang',
@@ -111,8 +117,9 @@ const Pricing: React.FC = () => {
             <section className="pricing-cards-section">
                 <div className="pricing-cards-container">
                     {plans.map((plan, index) => (
-                        <div key={index} className={`pricing-card ${plan.popular ? 'pricing-card-popular' : ''}`}>
-                            {plan.popular && <div className="pricing-popular-badge">MOST POPULAR</div>}
+                        <div key={index} className={`pricing-card ${plan.popular ? 'pricing-card-popular' : ''} ${plan.annual ? 'pricing-card-annual' : ''}`}>
+                            {plan.popular && <div className="pricing-popular-badge">RECOMMENDED</div>}
+                            {plan.annual && <div className="pricing-annual-badge">PALING HEMAT</div>}
                             <div className="pricing-card-header">
                                 <h3 className="pricing-card-name">{plan.name}</h3>
                                 <span className="pricing-card-period">({plan.period})</span>
@@ -121,6 +128,7 @@ const Pricing: React.FC = () => {
                                 <span className="pricing-price-value">{plan.price}</span>
                                 <span className="pricing-price-unit">{plan.priceUnit}</span>
                             </div>
+                            <div className="pricing-price-old">{plan.oldPrice}</div>
                             {plan.priceNote && (
                                 <div className="pricing-price-note">{plan.priceNote}</div>
                             )}

@@ -64,6 +64,7 @@ case "$1" in
         ;;
     install)
         echo "Installing dependencies..."
+        pnpm approve-builds --all
         pnpm install
         ;;
     build)
