@@ -46,7 +46,7 @@ const PricingSection: React.FC = () => {
                 <li className="flex gap-2"><span>✓</span> Manajemen inventori</li>
               </ul>
               <a href="https://app.spapos.id/login" className={`mt-auto flex h-12 w-full items-center justify-center rounded-xl text-sm font-medium no-underline ${pkg.highlight ? 'bg-white text-[#2A4D45]' : 'bg-[#E8E4DB] text-[#1C2926]'}`}>
-                Coba 90 Hari
+                Coba 7 Hari
               </a>
             </SpotlightCard>
           ))}

@@ -32,7 +32,7 @@ const ProcessStepsSection: React.FC = () => {
             <p className="text-lg font-medium text-[#1C2926]">Jadwalkan konsultasi</p>
             <p className="mt-1 text-sm text-[#5A6B67]">Lihat apakah SPAPOS cocok dengan alur spa Anda.</p>
           </div>
-          <a href="https://wa.me/6281234567890" className="flex h-12 w-full items-center justify-center rounded-xl bg-[#2A4D45] px-6 text-sm font-medium text-white no-underline sm:w-auto">
+          <a href="https://wa.me/6282230713260?text=halo%20saya%20ingin%20berkonsultasi%2030%20menit%2C%20terkait%20dengan%20Operasional%20Spa%20dengan%20mas%20Feri%0ANama%3A%20%5Bdiisi%5D%0AIG%20brand%20SPA%2FPribadi%3A%20%5Bdiisi%5D%0AJumlah%20Karyawan%3A%20%5Bdiisi%5D%0AJumlah%20Cabang%20Spa%3A%20" className="flex h-12 w-full items-center justify-center rounded-xl bg-[#2A4D45] px-6 text-sm font-medium text-white no-underline sm:w-auto">
             Konsultasi WhatsApp
           </a>
         </div>

@@ -10,7 +10,7 @@ const FAQSection: React.FC = () => {
     { question: 'Bisa dipakai untuk beberapa cabang?', answer: 'Bisa. Anda bisa melihat ringkasan semua cabang dengan tenang dari satu dashboard.' },
     { question: 'Pemakaian bahan tercatat otomatis?', answer: 'Bisa. Pemakaian oil, cream, dan lulur dapat tercatat agar stok tidak mudah bocor.' },
     { question: 'Komisi terapis dihitung sistem?', answer: 'Ya, komisi dihitung otomatis dari transaksi sehingga proses rekap lebih rapi.' },
-    { question: 'Bisa dicoba dulu?', answer: 'Bisa. Anda dapat mulai dari trial 90 hari untuk mencoba kecocokan alurnya.' },
+    { question: 'Bisa dicoba dulu?', answer: 'Bisa. Anda dapat mulai dari trial 7 hari untuk mencoba kecocokan alurnya.' },
   ];
 
   return (

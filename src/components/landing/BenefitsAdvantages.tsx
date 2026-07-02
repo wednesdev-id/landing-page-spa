@@ -89,7 +89,7 @@ const BenefitsAdvantages: React.FC = () => {
             className="benefits-cta-button"
             onClick={() => window.location.href = 'https://app.spapos.id/login'}
           >
-            Coba Trial 90 Hari
+            Coba Trial 7 Hari
           </button>
         </div>
       </div>

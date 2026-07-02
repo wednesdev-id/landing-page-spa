@@ -44,7 +44,7 @@ export default function App() {
               
               {/* WhatsApp Floating Icon */}
               <a 
-                href="https://wa.me/6281339691260" 
+                href="https://wa.me/6282230713260?text=halo%20saya%20ingin%20berkonsultasi%2030%20menit%2C%20terkait%20dengan%20Operasional%20Spa%20dengan%20mas%20Feri%0ANama%3A%20%5Bdiisi%5D%0AIG%20brand%20SPA%2FPribadi%3A%20%5Bdiisi%5D%0AJumlah%20Karyawan%3A%20%5Bdiisi%5D%0AJumlah%20Cabang%20Spa%3A%20" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="fixed bottom-6 right-6 z-[999] flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300"

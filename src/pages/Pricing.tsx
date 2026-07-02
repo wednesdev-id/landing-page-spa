@@ -11,7 +11,7 @@ const Pricing: React.FC = () => {
 
     const handleSubscribe = (plan: string) => {
         const message = `Halo, saya tertarik dengan paket ${plan} SPAPOS. Mohon info lebih lanjut.`;
-        window.open(`https://wa.me/6281339691260?text=${encodeURIComponent(message)}`, '_blank');
+        window.open(`https://wa.me/6282230713260?text=${encodeURIComponent(message)}`, '_blank');
     };
 
     const plans = [
@@ -171,7 +171,7 @@ const Pricing: React.FC = () => {
 
             {/* CTA */}
             <section className="pricing-cta-section">
-                <h2 className="pricing-cta-title">Masih Ragu? Coba Trial 90 Hari Dulu</h2>
+                <h2 className="pricing-cta-title">Masih Ragu? Coba Trial 7 Hari Dulu</h2>
                 <p className="pricing-cta-subtitle">
                     Nikmati semua fitur SPAPOS tanpa biaya selama masa trial
                 </p>

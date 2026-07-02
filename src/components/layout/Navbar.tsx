@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Beranda', path: isHome ? '#hero' : '/', activeKey: 'home' },
     { name: 'Masalah', path: isHome ? '#problem' : '/#problem', activeKey: '' },
-    { name: 'Trial 90 Hari', path: isHome ? '#trial' : '/#trial', activeKey: '' },
+    { name: 'Trial 7 Hari', path: isHome ? '#trial' : '/#trial', activeKey: '' },
     { name: 'Biaya', path: isHome ? '#pricing' : '/#pricing', activeKey: '' },
   ];
 
@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
             ))}
           </div>
           <button className="navbar-cta-button" onClick={handleGetStarted} role="button" tabIndex={0}>
-            <span className="navbar-cta-text">Coba Gratis 90 Hari</span>
+            <span className="navbar-cta-text">Coba Gratis 7 Hari</span>
             <svg className="navbar-cta-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
         </div>
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
               )
             ))}
             <button className="mobile-cta" onClick={() => { handleGetStarted(); setIsMenuOpen(false); }}>
-              Coba Gratis 90 Hari
+              Coba Gratis 7 Hari
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
           </div>

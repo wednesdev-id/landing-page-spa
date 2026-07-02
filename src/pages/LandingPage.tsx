@@ -6,7 +6,7 @@ import ProblemSection from '../components/landing/ProblemSection';
 import WorkflowSection from '../components/landing/WorkflowSection';
 import CoreFeaturesSection from '../components/landing/CoreFeaturesSection';
 import DashboardPreviewSection from '../components/landing/DashboardPreviewSection';
-import Trial90Section from '../components/landing/Trial90Section';
+import Trial7Section from '../components/landing/Trial7Section';
 import PricingSection from '../components/landing/PricingSection';
 import FAQSection from '../components/landing/FAQSection';
 import ProcessStepsSection from '../components/landing/ProcessStepsSection';
@@ -18,8 +18,8 @@ const LandingPage: React.FC = () => {
   return (
     <div className="landing-page new-design">
       <SEO
-        title="SPAPOS - Kelola Spa Tanpa Jadwal Bentrok | Trial 90 Hari"
-        description="SPAPOS membantu owner spa mengontrol booking, stok, kasir, komisi, membership, dan laporan cabang dalam satu dashboard. Coba trial 90 hari sekarang."
+        title="SPAPOS - Kelola Spa Tanpa Jadwal Bentrok | Trial 7 Hari"
+        description="SPAPOS membantu owner spa mengontrol booking, stok, kasir, komisi, membership, dan laporan cabang dalam satu dashboard. Coba trial 7 hari sekarang."
       />
       <Navbar />
       <HeroSection />
@@ -27,7 +27,7 @@ const LandingPage: React.FC = () => {
       <WorkflowSection />
       <CoreFeaturesSection />
       <DashboardPreviewSection />
-      <Trial90Section />
+      <Trial7Section />
       <PricingSection />
       <FAQSection />
       <ProcessStepsSection />

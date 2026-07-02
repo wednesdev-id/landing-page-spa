@@ -6,7 +6,7 @@ const HeroSection: React.FC = () => {
     <section id="hero" className="w-full bg-[#FAF8F5] pt-28 pb-16 md:pt-36 md:pb-24">
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center px-5 text-center">
         <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-[#2A4D45]">
-          Trial 90 hari untuk owner spa
+          Trial 7 hari untuk owner spa
         </p>
         <h1 className="text-4xl font-medium leading-[1.15] text-[#1C2926] md:text-6xl">
           Kelola Spa Lebih Rapi,<br className="hidden md:block" /> Tenang, dan Nyaman
@@ -17,9 +17,9 @@ const HeroSection: React.FC = () => {
 
         <div className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <a href="https://app.spapos.id/login" className="flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-[#2A4D45] px-8 text-base font-medium text-white no-underline shadow-lg shadow-[#2A4D45]/20 sm:w-auto transition-transform hover:scale-[1.02]">
-            Coba Gratis 90 Hari
+            Coba Gratis 7 Hari
           </a>
-          <a href="https://wa.me/6281234567890" className="flex h-14 w-full items-center justify-center rounded-2xl border border-[#D5D0C8] bg-white px-8 text-base font-medium text-[#2A4D45] no-underline sm:w-auto transition-colors hover:bg-[#F4F1EC]">
+          <a href="https://wa.me/6282230713260?text=halo%20saya%20ingin%20berkonsultasi%2030%20menit%2C%20terkait%20dengan%20Operasional%20Spa%20dengan%20mas%20Feri%0ANama%3A%20%5Bdiisi%5D%0AIG%20brand%20SPA%2FPribadi%3A%20%5Bdiisi%5D%0AJumlah%20Karyawan%3A%20%5Bdiisi%5D%0AJumlah%20Cabang%20Spa%3A%20" className="flex h-14 w-full items-center justify-center rounded-2xl border border-[#D5D0C8] bg-white px-8 text-base font-medium text-[#2A4D45] no-underline sm:w-auto transition-colors hover:bg-[#F4F1EC]">
             Konsultasi WhatsApp
           </a>
         </div>

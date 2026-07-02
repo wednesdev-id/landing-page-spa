@@ -51,7 +51,7 @@ const Contact: React.FC = () => {
                                             </div>
                                             <div>
                                                 <div className="font-bold text-mara-secondary mb-1">WhatsApp</div>
-                                                <a href="https://wa.me/6281339691260" target="_blank" rel="noopener noreferrer" className="text-white hover:text-mara-accent transition-colors block text-lg font-medium">+62 813-3969-1260</a>
+                                                <a href="https://wa.me/6282230713260" target="_blank" rel="noopener noreferrer" className="text-white hover:text-mara-accent transition-colors block text-lg font-medium">+62 822-3071-3260</a>
                                             </div>
                                         </div>
 

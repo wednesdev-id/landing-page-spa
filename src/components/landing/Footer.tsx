@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
                     <div className="footer-nav-col">
                         <h4 className="footer-col-title">Resources</h4>
                         <ul className="footer-col-links">
-                            <li><a href="https://wa.me/6281339691260" target="_blank" rel="noopener noreferrer" className="footer-link">Support</a></li>
+                            <li><a href="https://wa.me/6282230713260" target="_blank" rel="noopener noreferrer" className="footer-link">Support</a></li>
                             <li><a href="#" className="footer-link">Privacy policy</a></li>
                             <li><a href="#" className="footer-link">Terms & Conditions</a></li>
                         </ul>
