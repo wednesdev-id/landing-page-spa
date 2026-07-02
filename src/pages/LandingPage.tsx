@@ -4,7 +4,7 @@ import Navbar from '../components/layout/Navbar';
 import HeroSection from '../components/landing/HeroSection';
 import ProblemSection from '../components/landing/ProblemSection';
 import WorkflowSection from '../components/landing/WorkflowSection';
-import CoreFeaturesSection from '../components/landing/CoreFeaturesSection';
+
 import DashboardPreviewSection from '../components/landing/DashboardPreviewSection';
 import Trial7Section from '../components/landing/Trial7Section';
 import PricingSection from '../components/landing/PricingSection';
@@ -25,7 +25,7 @@ const LandingPage: React.FC = () => {
       <HeroSection />
       <ProblemSection />
       <WorkflowSection />
-      <CoreFeaturesSection />
+
       <DashboardPreviewSection />
       <Trial7Section />
       <PricingSection />

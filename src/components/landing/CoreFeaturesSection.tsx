@@ -1,10 +1,10 @@
 import React from 'react';
 
 const features = [
-  ['Booking lebih tertata', 'Jadwal terasa rapi, omzet tidak mudah terlewat.'],
-  ['Pembayaran jelas', 'Transaksi tercatat, pelayanan lebih profesional.'],
-  ['Stok lebih terjaga', 'Pemakaian bahan otomatis mengurangi stok.'],
-  ['Komisi mudah dicek', 'Perhitungan otomatis mengurangi salah hitung.'],
+  ['Booking terlewat', 'Chat masuk dari banyak channel, jadwal lupa dicatat, pelanggan akhirnya batal datang.'],
+  ['Stok treatment bocor', 'Cream, oil, dan bahan treatment terpakai tanpa catatan jelas. Biaya jalan terus, profit makin tipis.'],
+  ['Komisi salah hitung', 'Hitung manual rawan selisih, bikin staf komplain, dan admin kerja dua kali.'],
+  ['Sulit pantau dari jauh', 'Owner tidak selalu di outlet. Tanpa laporan real-time, keputusan bisnis jadi terlambat.'],
 ];
 
 const CoreFeaturesSection: React.FC = () => {
@@ -13,8 +13,11 @@ const CoreFeaturesSection: React.FC = () => {
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-12 px-5">
         <div className="text-center">
           <h2 className="text-3xl font-medium leading-tight text-[#1C2926] md:text-4xl">
-            Sistem yang membuat operasional terasa lebih ringan
+            Tanpa Sistem yang Rapi, Omzet Spa Bisa Bocor dari Banyak Sisi
           </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-base text-[#5A6B67] md:text-lg">
+            Bukan selalu karena pelanggan sepi. Kadang profit berkurang karena booking tidak tercatat, stok tidak terkontrol, komisi salah hitung, dan laporan datang terlambat.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
