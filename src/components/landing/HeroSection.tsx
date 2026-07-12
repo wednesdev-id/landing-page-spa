@@ -1,5 +1,5 @@
 import React from 'react';
-import dashboardImg from '../../assets/image.png';
+
 
 const HeroSection: React.FC = () => {
   return (
@@ -29,13 +29,17 @@ const HeroSection: React.FC = () => {
           <span className="flex items-center gap-1.5"><span className="text-[#2A4D45]">✓</span> Setup sederhana</span>
         </div>
 
-        <div className="relative mx-auto mt-14 w-full max-w-4xl px-2">
+        <div className="relative mx-auto mt-14 w-full max-w-sm px-2">
           <div className="rounded-[24px] bg-white p-2 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] md:p-4">
-            <img
-              src={dashboardImg}
-              alt="SPAPOS Dashboard"
-              className="block h-auto w-full rounded-[16px] border border-[#EBE7E0]"
-            />
+            <div className="relative w-full aspect-[9/16] rounded-[16px] overflow-hidden border border-[#EBE7E0]">
+              <iframe
+                className="absolute top-0 left-0 w-full h-full border-none"
+                src="https://www.youtube.com/embed/mhj_Qijio8A"
+                title="SPAPOS Shorts Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
